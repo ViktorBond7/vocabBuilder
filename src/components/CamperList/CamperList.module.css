@@ -1,0 +1,15 @@
+.list {
+  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 2;
+  margin-top: 50px;
+}
+.loadMore {
+  display: flex;
+  flex-direction: row;
+}
+/* .container {
+  display: flex;
+  flex-wrap: wrap;
+} */

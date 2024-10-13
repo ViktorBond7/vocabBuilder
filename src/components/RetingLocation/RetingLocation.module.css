@@ -1,0 +1,24 @@
+.ratingLocation {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 26px;
+  font-size: 16px;
+}
+.pageRating {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  text-decoration: underline;
+}
+.pageLocation {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+/* .iconns1 {
+  stroke: black;
+} */
+.iconns {
+  fill: none;
+  stroke: black;
+}

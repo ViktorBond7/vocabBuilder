@@ -1,0 +1,37 @@
+.item {
+  width: 430px;
+}
+
+.span {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 125%;
+  color: red;
+  background-color: #f2f4f7;
+  align-items: center;
+  justify-content: center;
+}
+
+.spanRating {
+  color: gold;
+  font-size: 20px;
+}
+.spanRatingDefault {
+  color: #e4e5e9;
+  font-size: 20px;
+}
+
+.containerRating {
+  display: flex;
+  align-items: center;
+}
+.containerHeader {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}

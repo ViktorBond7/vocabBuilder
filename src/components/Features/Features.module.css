@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.containerForm {
+  display: flex;
+  width: 448px;
+  height: 532px;
+  border: 1px solid rgba(16, 24, 40, 0.2);
+  border-radius: 20px;
+  padding: 26px 26px;
+}
+
+.containerComfortDet {
+  display: flex;
+}

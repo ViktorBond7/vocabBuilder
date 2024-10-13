@@ -1,0 +1,23 @@
+.optionalList {
+  justify-content: space-between;
+  align-items: center;
+  width: 430px;
+}
+
+.camperOpcion {
+  border-radius: 100px;
+  padding: 12px 18px;
+  display: inline-flex;
+  height: 44px;
+  background: #f2f4f7;
+  align-items: center;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  gap: 8px;
+}
+
+.iconns {
+  fill: none;
+  stroke: black;
+}

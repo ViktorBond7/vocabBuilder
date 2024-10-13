@@ -1,0 +1,61 @@
+/* .card {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.selected {
+  border-color: red; 
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.label {
+  font-size: 16px;
+} */
+.hiddenCheckbox {
+  display: none; /* Полностью скрываем чекбокс */
+}
+
+.card {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer; 
+  transition: border-color 0.3s ease;
+  width: 112px;
+  height: 96px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card:hover {
+  border-color: #007bff; 
+}
+
+.selected {
+  border-color: red; 
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.label {
+  font-size: 16px;
+}
+.equipmentList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
