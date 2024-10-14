@@ -66,6 +66,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
 h1,
 h2,
 h3,
@@ -74,6 +75,9 @@ h5,
 h6,
 p {
   margin: 0;
+  font-family: "MacPaw Fixel Display";
+  font-weight: 600;
+  font-size: 22px;
 }
 
 p:last-child {
