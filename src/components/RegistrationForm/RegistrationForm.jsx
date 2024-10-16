@@ -42,41 +42,25 @@ const RegistrationForm = () => {
         actions.resetForm();
       }}
     >
-      <Form className={css.form} autoComplete="off">
+      <Form autoComplete="off">
         <label htmlFor={nameId}>Name</label>
-        <Field className={css.label} name="name" id={nameId} />
-        <ErrorMessage className={css.errorName} name="name" component="span" />
+        <Field name="name" id={nameId} />
+        <ErrorMessage name="name" component="span" />
 
         <label htmlFor={emailId}>Email</label>
         <Field
-          className={css.label}
           name="email"
           placeholder="jane@acme.com"
           type="email"
           id={emailId}
         />
-        <ErrorMessage
-          className={css.errorEmail}
-          name="email"
-          component="span"
-        />
+        <ErrorMessage name="email" component="span" />
 
         <label htmlFor={passwordId}>Password</label>
-        <Field
-          className={css.label}
-          name="password"
-          type="password"
-          id={passwordId}
-        />
-        <ErrorMessage
-          className={css.errorPassword}
-          name="password"
-          component="span"
-        />
+        <Field name="password" type="password" id={passwordId} />
+        <ErrorMessage name="password" component="span" />
 
-        <button className={css.button} type="submit">
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </Form>
     </Formik>
   );
