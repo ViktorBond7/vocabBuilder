@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import WordList from "./pages/DictionaryPage/DictionaryPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
 import Layout from "./components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -22,15 +23,19 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<RegistrationPage />} />
-        <Route
-          path="/register"
-          element={
-            <WordList redirectTo="/words" component={<RegistrationPage />} />
-          }
-        />
+        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Layout>
   );
 }
 
 export default App;
+{
+  /* <Route
+          path="/register"
+          element={
+            <WordList redirectTo="/register" component={<RegistrationPage />} />
+          }
+        /> */
+}

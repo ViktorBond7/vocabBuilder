@@ -1,32 +1,23 @@
 import { useDispatch } from "react-redux";
-import css from "./RegistrationForm.module.scss";
-import * as Yup from "yup";
+import css from "./LoginForm.module.scss";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useId } from "react";
-import { ErrorMessage, Field, Formik, Form } from "formik";
-import toast from "react-hot-toast";
-import { register } from "../../redax/auth/operations";
+import * as Yup from "yup";
+import toast, { Toaster } from "react-hot-toast";
+import { logIn } from "../../redax/auth/operations";
 import { NavLink } from "react-router-dom";
 
 const userSchema = Yup.object().shape({
-  name: Yup.string().required("This is a required field"),
-  email: Yup.string()
-    .email()
-    .required("This is a required field")
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, "Invalid email format"),
+  email: Yup.string().email().required("This is a required field"),
   password: Yup.string()
-    .matches(
-      /^(?=.*[a-zA-Z]{6})(?=.*\d)[a-zA-Z\d]{7}$/,
-      "Password must be at least 7 characters long, contain at least 6 letters and 1 digit"
-    )
     .min(4, "Name must be at least 4 symb long")
     .max(20, "The name must be no more than 20 characters long")
 
     .required("This is a required field"),
 });
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
-  const nameId = useId();
   const emailId = useId();
   const passwordId = useId();
 
@@ -34,13 +25,12 @@ const RegistrationForm = () => {
     <>
       <Formik
         initialValues={{
-          name: "",
           email: "",
           password: "",
         }}
         validationSchema={userSchema}
         onSubmit={(values, actions) => {
-          dispatch(register(values))
+          dispatch(logIn(values))
             .unwrap()
             .then(() => {
               toast.success("Successfully!");
@@ -52,14 +42,6 @@ const RegistrationForm = () => {
         }}
       >
         <Form className={css.form} autoComplete="off">
-          <label htmlFor={nameId}>Name</label>
-          <Field className={css.label} name="name" id={nameId} />
-          <ErrorMessage
-            className={css.errorName}
-            name="name"
-            component="span"
-          />
-
           <label htmlFor={emailId}>Email</label>
           <Field
             className={css.label}
@@ -92,10 +74,9 @@ const RegistrationForm = () => {
           </button>
         </Form>
       </Formik>
-
-      <NavLink to="/login">Login</NavLink>
+      <NavLink to="/register">Register</NavLink>
+      <Toaster />
     </>
   );
 };
-
-export default RegistrationForm;
+export default LoginForm;

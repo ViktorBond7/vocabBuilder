@@ -8,9 +8,9 @@ const WordList = () => {
   const visibleWords = useSelector(selectWords);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchWords());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchWords());
+  // }, [dispatch]);
 
   return (
     <div>
