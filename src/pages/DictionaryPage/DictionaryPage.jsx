@@ -8,21 +8,18 @@ const WordList = () => {
   const visibleWords = useSelector(selectWords);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchWords());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchWords());
+  }, [dispatch]);
 
   return (
     <div>
+      <p>hello</p>
       <ul>
-        {visibleWords.length > 0 ? (
-          visibleWords.map((item) => (
-            <li key={item.id}>
-              <p> item</p>
-            </li>
-          ))
+        {visibleWords.results && visibleWords.results.length > 0 ? (
+          visibleWords.results.map((item) => <li key={item._id}>{item.en}</li>)
         ) : (
-          <h1>Create your first word😉</h1>
+          <li>No words available</li>
         )}
       </ul>
     </div>

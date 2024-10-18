@@ -37,7 +37,12 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "gh-pages": "^6.1.1",
-    "sass": "^1.79.5",
-    "vite": "^5.2.0"
+    "sass": "^1.80.2",
+    "sass-loader": "^16.0.2",
+    "vite": "^5.2.0",
+    "vite-plugin-full-reload": "^1.2.0",
+    "vite-plugin-html": "^3.2.2",
+    "vite-plugin-html-inject": "^1.1.2",
+    "vite-plugin-image-optimizer": "^1.1.8"
   }
 }
