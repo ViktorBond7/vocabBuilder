@@ -24,7 +24,15 @@ function App() {
   ) : (
     <Layout>
       <Routes>
-        <Route path="/" element={<RegistrationPage />} />
+        <Route
+          path="/"
+          element={
+            <RestrictedRoute
+              redirectTo="/dictionary"
+              component={<RegistrationPage />}
+            />
+          }
+        />
         <Route
           path="/register"
           element={

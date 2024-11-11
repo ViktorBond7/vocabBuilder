@@ -1,27 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import { selectWords } from "../../redax/words/selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchWords } from "../../redax/words/operations";
+import CustomPagination from "../../components/CustomPagination/CustomPagination";
+import Table from "../../components/Table/Table";
+import ModalEditDelete from "../../components/ModalEditDelete/ModalEditDelete";
 
 const WordList = () => {
-  const visibleWords = useSelector(selectWords);
   const dispatch = useDispatch();
+  const { results, totalPages, page, perPage } = useSelector(selectWords);
+  const [currentPage, setCurrentPage] = useState(page || 1);
 
   useEffect(() => {
-    dispatch(fetchWords());
-  }, [dispatch]);
+    dispatch(fetchWords(currentPage)); // Отримати дані для поточної сторінки
+  }, [dispatch, currentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page); // Змінити поточну сторінку при кліку
+  };
 
   return (
     <div>
       <p>hello</p>
-      <ul>
-        {visibleWords.results && visibleWords.results.length > 0 ? (
-          visibleWords.results.map((item) => <li key={item._id}>{item.en}</li>)
-        ) : (
-          <li>No words available</li>
-        )}
-      </ul>
+      <Table results={results} />
+      <CustomPagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
