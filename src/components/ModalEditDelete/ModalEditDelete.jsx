@@ -52,15 +52,22 @@ Modal.setAppElement("#root");
 // };
 
 // export default ModalEditDelete;
-const ModalEditDelete = ({ openModal, onClose, row }) => {
-  //   let id = row._id;
-  //   console.log("nbbbbbbbbbbbbbbb", id);
-  //   const { ua, en, category } = row;
+const ModalEditDelete = ({ openModal, onClose, row, onDelete }) => {
   const dispatch = useDispatch();
 
-  const handleDeleteWord = () => {
-    dispatch(deleteWord(row._id));
-    onClose();
+  //   const handleDeleteWord = () => {
+  //     dispatch(deleteWord(row._id));
+  //     onClose();
+  //   };
+
+  const handleDeleteWord = async () => {
+    try {
+      await dispatch(deleteWord(row._id)).unwrap();
+      onDelete(row._id); // Оновлюємо локальний стан у компоненті
+      onClose();
+    } catch (error) {
+      console.error("Помилка видалення:", error);
+    }
   };
 
   return (

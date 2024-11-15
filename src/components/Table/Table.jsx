@@ -1,10 +1,16 @@
 import DataTable from "react-data-table-component";
 import ModalEditDelete from "../ModalEditDelete/ModalEditDelete";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Table = ({ results }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
+  const [tableData, setTableData] = useState([]);
+  console.log("1111111111111", tableData);
+
+  useEffect(() => {
+    setTableData(results);
+  }, [results]);
 
   const collums = [
     {
@@ -41,10 +47,10 @@ const Table = ({ results }) => {
       ),
     },
   ];
-  const handleButtonClick = (row) => {
+  function handleButtonClick(row) {
     setIsOpen(true);
     setSelectedRow(row);
-  };
+  }
 
   const closeModal = () => {
     setIsOpen(false); // Закриваємо модальне вікно
@@ -83,19 +89,22 @@ const Table = ({ results }) => {
       },
     },
   };
-
+  const handleDelete = (id) => {
+    setTableData((prevData) => prevData.filter((item) => item._id !== id));
+  };
   return (
     <>
       <DataTable
         title="Word List"
         columns={collums}
-        data={results} // дані з бекенду
+        data={tableData} // дані з бекенду
         customStyles={customStyles}
       />
       <ModalEditDelete
         openModal={modalIsOpen}
         onClose={closeModal}
         row={selectedRow}
+        onDelete={handleDelete}
       />
     </>
   );

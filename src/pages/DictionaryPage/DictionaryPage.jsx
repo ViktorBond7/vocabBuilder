@@ -10,6 +10,7 @@ const WordList = () => {
   const dispatch = useDispatch();
   const { results, totalPages, page, perPage } = useSelector(selectWords);
   const [currentPage, setCurrentPage] = useState(page || 1);
+  console.log(results);
 
   useEffect(() => {
     dispatch(fetchWords(currentPage)); // Отримати дані для поточної сторінки
