@@ -25,8 +25,6 @@ const Table = ({ results }) => {
           style: {
             backgroundColor: "lightblue", // Задає колір фону для стовпця
             color: "darkblue", // Задає колір тексту для стовпця
-            // border: "2px solid darkblue",
-            // width: "30px",
           },
         },
       ],
