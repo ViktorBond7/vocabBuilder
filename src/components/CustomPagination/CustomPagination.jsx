@@ -6,6 +6,7 @@ import {
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import css from "./CustomPagination.module.scss";
+
 const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -60,9 +61,12 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
         {totalPages}
       </button>
     );
-
+    console.log("createAsyncThunk(118888888888811111111", pageNumbers);
     return pageNumbers;
   };
+
+  // console.log("createAsyncThunk(118888888888811111111", renderPageNumbers());
+
   return (
     <div className={css.pagination}>
       <button onClick={() => onPageChange(1)} disabled={currentPage === 1}>

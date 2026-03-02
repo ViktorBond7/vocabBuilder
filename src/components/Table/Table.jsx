@@ -1,16 +1,24 @@
 import DataTable from "react-data-table-component";
 import ModalEditDelete from "../ModalEditDelete/ModalEditDelete";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import ActionMenu from "../ActionMenu/ActionMenu";
 
 const Table = ({ results }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
-  const [tableData, setTableData] = useState([]);
-  console.log("1111111111111", tableData);
+  const [anchorEl, setAnchorEl] = useState(null); // Для позиціонування
 
-  useEffect(() => {
-    setTableData(results);
-  }, [results]);
+  const handleOpenPopover = (event, row) => {
+    setAnchorEl(event.currentTarget); // Зберігаємо кнопку, на яку натиснули
+    console.log("event", event);
+
+    setSelectedRow(row);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setSelectedRow(null);
+  };
 
   const collums = [
     {
@@ -41,7 +49,7 @@ const Table = ({ results }) => {
     {
       name: "cat",
       cell: (row) => (
-        <button onClick={() => handleButtonClick(row)}>...</button>
+        <button onClick={(e) => handleOpenPopover(e, row)}>...</button>
       ),
     },
   ];
@@ -84,87 +92,33 @@ const Table = ({ results }) => {
           borderRightWidth: "1px",
           borderRightColor: "red",
         },
+        "&:last-child": {
+          overflow: "visible", // Дозволяємо меню виходити за межі комірки
+          position: "relative",
+        },
       },
     },
   };
-  const handleDelete = (id) => {
-    setTableData((prevData) => prevData.filter((item) => item._id !== id));
-  };
+
   return (
     <>
       <DataTable
         title="Word List"
         columns={collums}
-        data={tableData} // дані з бекенду
+        data={results} // дані з бекенду
         customStyles={customStyles}
       />
+      {/* Якщо anchorEl існує — показуємо маленьке меню */}
+      {anchorEl && (
+        <ActionMenu anchor={anchorEl} row={selectedRow} onClose={handleClose} />
+      )}
+
       <ModalEditDelete
         openModal={modalIsOpen}
         onClose={closeModal}
         row={selectedRow}
-        onDelete={handleDelete}
       />
     </>
   );
 };
 export default Table;
-
-// const customStyles = {
-//   header: {
-//     style: {
-//       backgroundColor: "#f1f1f1",
-//       fontSize: "16px",
-//       fontWeight: "bold",
-//     },
-//   },
-//   rows: {
-//     style: {
-//       minHeight: "72px",
-//     },
-//   },
-//   headCells: {
-//     style: {
-//       paddingLeft: "8px",
-//       paddingRight: "8px",
-//     },
-//   },
-//   cells: {
-//     style: {
-//       paddingLeft: "8px",
-//       paddingRight: "8px",
-//     },
-//   },
-// };
-
-// const customStyles = {
-//   pagination: {
-//     style: {
-//       display: "flex",
-//       justifyContent: "center",
-//       alignItems: "center",
-//       padding: "10px",
-//     },
-//     pageButtonsStyle: {
-//       border: "1px solid #ddd",
-//       borderRadius: "6px",
-//       padding: "5px 10px",
-//       margin: "0 5px",
-//       cursor: "pointer",
-//       transition: "0.3s",
-//       backgroundColor: "#fff",
-//       color: "#333",
-//       "&:hover": {
-//         backgroundColor: "#f1f1f1",
-//       },
-//       "&:focus": {
-//         outline: "none",
-//         backgroundColor: "#8FA9A2",
-//         color: "#fff",
-//       },
-//     },
-//     activePageStyle: {
-//       backgroundColor: "#8FA9A2",
-//       color: "#fff",
-//     },
-//   },
-// };

@@ -24,7 +24,7 @@ export const register = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const logIn = createAsyncThunk(
@@ -38,7 +38,7 @@ export const logIn = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const logOut = createAsyncThunk(
@@ -51,28 +51,9 @@ export const logOut = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
-// export const refreshUser = createAsyncThunk(
-//   "auth/refresh",
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistedToken = state.auth.token;
-
-//     if (persistedToken === null) {
-//       return thunkAPI.rejectWithValue("Unable to fetch user");
-//     }
-
-//     try {
-//       setAuthHeader(persistedToken);
-//       const res = await axios.get("/users/current");
-//       return res.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
@@ -91,10 +72,10 @@ export const refreshUser = createAsyncThunk(
       if (error.response.status === 401) {
         // Optional: handle token refresh or redirect to login
         return thunkAPI.rejectWithValue(
-          "Session expired. Please log in again."
+          "Session expired. Please log in again.",
         );
       }
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );

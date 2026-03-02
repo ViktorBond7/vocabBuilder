@@ -27,16 +27,12 @@ const wordSlice = createSlice({
         state.loading = true;
         state.error = false;
       })
-      // .addCase(deleteWord.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.items = state.items.filter(
-      //     (item) => item._id !== action.payload._id
-      //   );
-      // })
       .addCase(deleteWord.fulfilled, (state, action) => {
+        console.log("action.payload787878", action.payload);
+
         state.loading = false;
         const idToRemove =
-          action.payload._id || action.payload.id || action.payload; // Обробка різних варіантів
+          action.payload._id || action.payload.id || action.payload;
         state.items = state.items.filter((item) => item._id !== idToRemove);
       })
       .addCase(deleteWord.rejected, (state) => {

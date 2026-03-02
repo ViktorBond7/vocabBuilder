@@ -13,11 +13,11 @@ const WordList = () => {
   console.log(results);
 
   useEffect(() => {
-    dispatch(fetchWords(currentPage)); // Отримати дані для поточної сторінки
+    dispatch(fetchWords(currentPage));
   }, [dispatch, currentPage]);
 
   const handlePageChange = (page) => {
-    setCurrentPage(page); // Змінити поточну сторінку при кліку
+    setCurrentPage(page); 
   };
 
   return (

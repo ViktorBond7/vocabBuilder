@@ -9,18 +9,15 @@ import { NavLink } from "react-router-dom";
 
 const userSchema = Yup.object().shape({
   name: Yup.string().required("This is a required field"),
-  email: Yup.string()
-    .email()
-    .required("This is a required field")
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, "Invalid email format"),
+  email: Yup.string().email().required("This is a required field"),
+  // .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, "Invalid email format"),
   password: Yup.string()
     .matches(
       /^(?=.*[a-zA-Z]{6})(?=.*\d)[a-zA-Z\d]{7}$/,
-      "Password must be at least 7 characters long, contain at least 6 letters and 1 digit"
+      "Password must be 6 English letters and 1 number"
     )
     .min(4, "Name must be at least 4 symb long")
     .max(20, "The name must be no more than 20 characters long")
-
     .required("This is a required field"),
 });
 
