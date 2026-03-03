@@ -1,17 +1,19 @@
 import DataTable from "react-data-table-component";
-import ModalEditDelete from "../ModalEditDelete/ModalEditDelete";
+import ModalDeleteWord from "../ModalDeleteWord/ModalDeleteWord";
 import { useState } from "react";
 import ActionMenu from "../ActionMenu/ActionMenu";
+import EditWordForm from "../EditWordForm/EditWordForm";
 
 const Table = ({ results }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null); // Для позиціонування
+  const [isOpenEditForm, setIsOpenEditForm] = useState(false); // Стан модального вікна
+
+  console.log("anchorEl", anchorEl);
 
   const handleOpenPopover = (event, row) => {
     setAnchorEl(event.currentTarget); // Зберігаємо кнопку, на яку натиснули
-    console.log("event", event);
-
     setSelectedRow(row);
   };
 
@@ -53,10 +55,6 @@ const Table = ({ results }) => {
       ),
     },
   ];
-  function handleButtonClick(row) {
-    setIsOpen(true);
-    setSelectedRow(row);
-  }
 
   const closeModal = () => {
     setIsOpen(false); // Закриваємо модальне вікно
@@ -105,19 +103,26 @@ const Table = ({ results }) => {
       <DataTable
         title="Word List"
         columns={collums}
-        data={results} // дані з бекенду
+        data={results} // data from redux
         customStyles={customStyles}
       />
       {/* Якщо anchorEl існує — показуємо маленьке меню */}
-      {anchorEl && (
-        <ActionMenu anchor={anchorEl} row={selectedRow} onClose={handleClose} />
-      )}
 
-      <ModalEditDelete
-        openModal={modalIsOpen}
-        onClose={closeModal}
-        row={selectedRow}
+      <ActionMenu
+        anchor={anchorEl}
+        onOpenModalDelete={() => setIsOpen(true)}
+        onOpenEditForm={() => setIsOpenEditForm(true)}
+        onClose={handleClose}
       />
+
+      {modalIsOpen && (
+        <ModalDeleteWord
+          openModal={modalIsOpen}
+          onClose={closeModal}
+          row={selectedRow}
+        />
+      )}
+      {isOpenEditForm && <EditWordForm />}
     </>
   );
 };

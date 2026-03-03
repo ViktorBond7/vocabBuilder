@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { fetchWords } from "../../redax/words/operations";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
 import Table from "../../components/Table/Table";
-import ModalEditDelete from "../../components/ModalEditDelete/ModalEditDelete";
 
 const WordList = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,7 @@ const WordList = () => {
   }, [dispatch, currentPage]);
 
   const handlePageChange = (page) => {
-    setCurrentPage(page); 
+    setCurrentPage(page);
   };
 
   return (

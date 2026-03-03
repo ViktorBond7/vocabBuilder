@@ -1,49 +1,46 @@
-import { useDispatch } from "react-redux";
-import { deleteWord } from "../../redax/words/operations";
+import Modal from "react-modal";
+import css from "./ActionMenu.module.scss";
 
-const ActionMenu = ({ anchor, row, onClose }) => {
-  const dispatch = useDispatch();
+const ActionMenu = ({ anchor, onClose, onOpenModalDelete, onOpenEditForm }) => {
   if (!anchor) return null;
 
-  // Отримуємо координати кнопки
+  const isOpen = Boolean(anchor); // Відкриваємо меню, якщо anchor існує
   const rect = anchor.getBoundingClientRect();
-
-  const style = {
-    position: "absolute",
-    top: `${rect.bottom + window.scrollY}px`, // Під кнопкою + прокрутка
-    left: `${rect.left + window.scrollX - 80}px`, // Трохи вліво, щоб вирівняти
-    zIndex: 1000,
-    backgroundColor: "white",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    borderRadius: "8px",
-    padding: "10px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-  };
-
-  // Вираховуємо позицію або використовуємо абсолютне позиціонування
   return (
-    <div style={style}>
-      <button
-        onClick={() => {
-          /* відкрити модалку редагування */
-          console.log("id", row._id);
-
-          onClose();
-        }}
-      >
-        ✏️ Edit
-      </button>
-      <button
-        onClick={async () => {
-          await dispatch(deleteWord(row._id)).unwrap();
-          onClose();
-        }}
-      >
-        🗑️ Delete
-      </button>
-    </div>
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      shouldCloseOnOverlayClick={true}
+      contentLabel="Edit or Delete"
+      overlayClassName={css.overlay}
+      className={css.wraperBtn}
+      style={{
+        content: {
+          position: "absolute",
+          top: `${rect.bottom + window.scrollY}px`,
+          left: `${rect.left + window.scrollX - 50}px`,
+          right: "auto",
+          bottom: "auto",
+        },
+      }}
+    >
+      <div className={css.wraperBtn}>
+        <button
+          onClick={() => {
+            onOpenEditForm();
+          }}
+        >
+          ✏️ Edit
+        </button>
+        <button
+          onClick={() => {
+            onOpenModalDelete();
+          }}
+        >
+          🗑️ Delete
+        </button>
+      </div>
+    </Modal>
   );
 };
 
