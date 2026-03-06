@@ -36,9 +36,9 @@ export const deleteWord = createAsyncThunk(
 
 export const editWord = createAsyncThunk(
   "word/editWord",
-  async (id, thunkAPI) => {
+  async ({ id, data }, thunkAPI) => {
     try {
-      const response = await axios.patch(`words/edit/${id}`);
+      const response = await axios.patch(`words/edit/${id}`, data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

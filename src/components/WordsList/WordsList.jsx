@@ -24,13 +24,9 @@ const WordList = () => {
     setSelectedRow(row);
   };
 
-  const handleOpenModalDelete = () => {
-    setAnchorEl(null); // Миттєво прибираємо якір (div зникає)
-
-    // Даємо React час повністю "забути" про попередній стан DOM
-    setTimeout(() => {
-      setOpenModalDelete(true);
-    }, 100);
+  const handleOpenModal = (target) => {
+    setAnchorEl(null);
+    target(true);
   };
 
   const handleCloseMenu = () => {
@@ -38,8 +34,8 @@ const WordList = () => {
     setSelectedRow(null); // Скидаємо вибраний рядок
   };
 
-  const closeModal = () => {
-    setOpenModalDelete(false); // Закриваємо модальне вікно
+  const closeModal = (target) => {
+    target(false); // Закриваємо модальне вікно
     setSelectedRow(null); // Скидаємо вибраний рядок
   };
 
@@ -64,8 +60,8 @@ const WordList = () => {
       {anchorEl && (
         <ActionMenu
           anchor={anchorEl}
-          onOpenModalDelete={handleOpenModalDelete}
-          onOpenEditForm={() => setIsOpenEditForm(true)}
+          onOpenModalDelete={() => handleOpenModal(setOpenModalDelete)}
+          onOpenEditForm={() => handleOpenModal(setIsOpenEditForm)}
           onClose={handleCloseMenu}
         />
       )}
@@ -73,11 +69,17 @@ const WordList = () => {
       {IsOpenModalDelete && (
         <ModalDeleteWord
           openModal={IsOpenModalDelete}
-          onClose={closeModal}
+          onClose={() => closeModal(setOpenModalDelete)}
           row={selectedRow}
         />
       )}
-      {isOpenEditForm && <EditWordForm />}
+      {isOpenEditForm && (
+        <EditWordForm
+          isOpen={isOpenEditForm}
+          onClose={() => closeModal(setIsOpenEditForm)}
+          row={selectedRow}
+        />
+      )}
     </div>
   );
 };
