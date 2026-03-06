@@ -1,35 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import { selectWords } from "../../redax/words/selectors";
-import { useEffect, useState } from "react";
-import { fetchWords } from "../../redax/words/operations";
-import CustomPagination from "../../components/CustomPagination/CustomPagination";
-import Table from "../../components/Table/Table";
+import WordList from "../../components/WordsList/WordsList";
 
-const WordList = () => {
-  const dispatch = useDispatch();
-  const { results, totalPages, page, perPage } = useSelector(selectWords);
-  const [currentPage, setCurrentPage] = useState(page || 1);
-  console.log(results);
-
-  useEffect(() => {
-    dispatch(fetchWords(currentPage));
-  }, [dispatch, currentPage]);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
+const DictionaryPage = () => {
   return (
     <div>
-      <p>hello</p>
-      <Table results={results} />
-      <CustomPagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      {/* <DocumentTitle>Login</DocumentTitle> */}
+      <WordList />
     </div>
   );
 };
-
-export default WordList;
+export default DictionaryPage;

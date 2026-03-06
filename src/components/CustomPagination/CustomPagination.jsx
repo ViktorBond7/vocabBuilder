@@ -19,7 +19,7 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
         disabled={currentPage === 1}
       >
         1
-      </button>
+      </button>,
     );
 
     // Якщо поточна сторінка більше 4, додаємо три крапки після першої сторінки
@@ -30,8 +30,6 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
     // Відображаємо сторінки навколо поточної сторінки (від currentPage - 1 до currentPage + 1)
     const startPage = Math.max(2, currentPage - 1);
     const endPage = Math.min(totalPages - 1, currentPage + 1);
-    console.log("max", startPage);
-    console.log("min", endPage);
 
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
@@ -42,7 +40,7 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
           className={currentPage === i ? css.active : ""}
         >
           {i}
-        </button>
+        </button>,
       );
     }
 
@@ -59,13 +57,11 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
         disabled={currentPage === totalPages}
       >
         {totalPages}
-      </button>
+      </button>,
     );
-    console.log("createAsyncThunk(118888888888811111111", pageNumbers);
+
     return pageNumbers;
   };
-
-  // console.log("createAsyncThunk(118888888888811111111", renderPageNumbers());
 
   return (
     <div className={css.pagination}>

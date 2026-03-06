@@ -1,27 +1,10 @@
 import DataTable from "react-data-table-component";
-import ModalDeleteWord from "../ModalDeleteWord/ModalDeleteWord";
-import { useState } from "react";
-import ActionMenu from "../ActionMenu/ActionMenu";
-import EditWordForm from "../EditWordForm/EditWordForm";
+// import ModalDeleteWord from "../ModalDeleteWord/ModalDeleteWord";
+// import { useState } from "react";
+// import ActionMenu from "../ActionMenu/ActionMenu";
+// import EditWordForm from "../EditWordForm/EditWordForm";
 
-const Table = ({ results }) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
-  const [anchorEl, setAnchorEl] = useState(null); // Для позиціонування
-  const [isOpenEditForm, setIsOpenEditForm] = useState(false); // Стан модального вікна
-
-  console.log("anchorEl", anchorEl);
-
-  const handleOpenPopover = (event, row) => {
-    setAnchorEl(event.currentTarget); // Зберігаємо кнопку, на яку натиснули
-    setSelectedRow(row);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-    setSelectedRow(null);
-  };
-
+const Table = ({ results, onActionClick }) => {
   const collums = [
     {
       name: "word",
@@ -51,15 +34,10 @@ const Table = ({ results }) => {
     {
       name: "cat",
       cell: (row) => (
-        <button onClick={(e) => handleOpenPopover(e, row)}>...</button>
+        <button onClick={(e) => onActionClick(e, row)}>...</button>
       ),
     },
   ];
-
-  const closeModal = () => {
-    setIsOpen(false); // Закриваємо модальне вікно
-    setSelectedRow(null); // Скидаємо вибраний рядок
-  };
 
   const customStyles = {
     header: {
@@ -106,23 +84,6 @@ const Table = ({ results }) => {
         data={results} // data from redux
         customStyles={customStyles}
       />
-      {/* Якщо anchorEl існує — показуємо маленьке меню */}
-
-      <ActionMenu
-        anchor={anchorEl}
-        onOpenModalDelete={() => setIsOpen(true)}
-        onOpenEditForm={() => setIsOpenEditForm(true)}
-        onClose={handleClose}
-      />
-
-      {modalIsOpen && (
-        <ModalDeleteWord
-          openModal={modalIsOpen}
-          onClose={closeModal}
-          row={selectedRow}
-        />
-      )}
-      {isOpenEditForm && <EditWordForm />}
     </>
   );
 };

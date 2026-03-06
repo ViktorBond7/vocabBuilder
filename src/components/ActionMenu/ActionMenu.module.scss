@@ -1,23 +1,12 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: transparent; /* Робимо фон невидимим */
-  z-index: 999; /* Трохи менше, ніж у самого меню */
-}
-
-.wraperBtn {
-  position: absolute; /* Обов'язково для позиціонування */
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 12px;
+.menuWrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background-color: aliceblue;
+  align-items: flex-start;
+  padding: 5px;
+}
+.menuBtn {
   border: none;
-  outline: none;
-  z-index: 1000;
+  background-color: inherit;
 }

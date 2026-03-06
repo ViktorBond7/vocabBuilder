@@ -8,10 +8,12 @@ const ModalDeleteWord = ({ openModal, onClose, row }) => {
 
   const handleDeleteWord = async () => {
     try {
+      console.log("delete word", row._id);
       await dispatch(deleteWord(row._id)).unwrap();
 
       onClose();
     } catch (error) {
+      onClose();
       console.error("Error", error);
     }
   };
@@ -21,6 +23,7 @@ const ModalDeleteWord = ({ openModal, onClose, row }) => {
       isOpen={openModal}
       onRequestClose={onClose}
       shouldCloseOnOverlayClick={true}
+      ariaHideApp={false}
       contentLabel="Edit or Delete"
       style={{
         content: {
@@ -51,14 +54,3 @@ const ModalDeleteWord = ({ openModal, onClose, row }) => {
 };
 
 export default ModalDeleteWord;
-
-// const customStyles = {
-//   content: {
-//     top: "50%",
-//     left: "50%",
-//     right: "auto",
-//     bottom: "auto",
-//     marginRight: "-50%",
-//     transform: "translate(-50%, -50%)",
-//   },
-// };

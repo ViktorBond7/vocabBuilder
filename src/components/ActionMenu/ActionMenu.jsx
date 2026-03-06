@@ -1,46 +1,39 @@
-import Modal from "react-modal";
+import { useEffect, useRef } from "react";
 import css from "./ActionMenu.module.scss";
 
 const ActionMenu = ({ anchor, onClose, onOpenModalDelete, onOpenEditForm }) => {
-  if (!anchor) return null;
+  const menuRef = useRef(null);
 
-  const isOpen = Boolean(anchor); // Відкриваємо меню, якщо anchor існує
+  // Закриття меню, якщо клікнули поза ним
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onClose]);
+
   const rect = anchor.getBoundingClientRect();
+
+  const style = {
+    position: "absolute",
+    top: `${rect.bottom + window.scrollY}px`,
+    left: `${rect.left + window.scrollX - 60}px`,
+    zIndex: 1000,
+  };
+
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      shouldCloseOnOverlayClick={true}
-      contentLabel="Edit or Delete"
-      overlayClassName={css.overlay}
-      className={css.wraperBtn}
-      style={{
-        content: {
-          position: "absolute",
-          top: `${rect.bottom + window.scrollY}px`,
-          left: `${rect.left + window.scrollX - 50}px`,
-          right: "auto",
-          bottom: "auto",
-        },
-      }}
-    >
-      <div className={css.wraperBtn}>
-        <button
-          onClick={() => {
-            onOpenEditForm();
-          }}
-        >
-          ✏️ Edit
-        </button>
-        <button
-          onClick={() => {
-            onOpenModalDelete();
-          }}
-        >
-          🗑️ Delete
-        </button>
-      </div>
-    </Modal>
+    <div ref={menuRef} style={style} className={css.menuWrapper}>
+      <button className={css.menuBtn} onClick={onOpenEditForm}>
+        ✏️ Edit
+      </button>
+      <button className={css.menuBtn} onClick={onOpenModalDelete}>
+        🗑️ Delete
+      </button>
+    </div>
   );
 };
 
