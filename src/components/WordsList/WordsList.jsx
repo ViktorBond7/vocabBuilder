@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectWords } from "../../redax/words/selectors";
 import { useEffect, useState } from "react";
-import { fetchWords } from "../../redax/words/operations";
+import { fetchWords, fetchWordsOwn } from "../../redax/words/operations";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
 import Table from "../../components/Table/Table";
 
@@ -40,7 +40,7 @@ const WordList = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchWords(currentPage));
+    dispatch(fetchWordsOwn(currentPage));
   }, [dispatch, currentPage]);
 
   const handlePageChange = (page) => {

@@ -21,6 +21,7 @@ const EditWordForm = ({ isOpen, onClose, row }) => {
     en: row?.en || "",
     ua: row?.ua || "",
     category: row?.category || "",
+    isIrregular: row?.isIrregular || false,
   });
   console.log("Редагування слова:", row); // Виводимо поточні дані для перевірки
   const dispatch = useDispatch();
@@ -37,6 +38,10 @@ const EditWordForm = ({ isOpen, onClose, row }) => {
 
   const onSubmit = (e) => {
     e.preventDefault(); // Зупиняємо перезавантаження сторінки
+    if (formData.category !== "verb") {
+      delete formData.isIrregular; // Видаляємо поле, якщо категорія не "verb"
+    }
+
     dispatch(editWord({ id: row._id, data: formData }));
     onClose();
   };

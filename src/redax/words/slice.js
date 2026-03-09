@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteWord, fetchWords } from "./operations";
+import { deleteWord, fetchWords, fetchWordsOwn } from "./operations";
 
 const wordSlice = createSlice({
   name: "words",
@@ -23,17 +23,33 @@ const wordSlice = createSlice({
         state.error = true;
       })
 
+      .addCase(fetchWordsOwn.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(fetchWordsOwn.fulfilled, (state, action) => {
+        console.log("fetchWordsOwn.fulfilled action.payload", action.payload);
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchWordsOwn.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      })
+
       .addCase(deleteWord.pending, (state) => {
         state.loading = true;
         state.error = false;
       })
       .addCase(deleteWord.fulfilled, (state, action) => {
         console.log("action.payload787878", action.payload);
+        console.log("JSON.parse(JSON.stringify(state))", JSON.parse(JSON.stringify(state)));
 
         state.loading = false;
-        const idToRemove =
-          action.payload._id || action.payload.id || action.payload;
-        state.items = state.items.filter((item) => item._id !== idToRemove);
+
+        state.items.results = state.items.results.filter(
+          (item) => item._id !== action.payload.id,
+        );
       })
       .addCase(deleteWord.rejected, (state) => {
         state.loading = false;

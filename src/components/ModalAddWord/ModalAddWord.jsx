@@ -1,8 +1,12 @@
 import Modal from "react-modal";
 import css from "./ModalAddWord.module.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useDispatch } from "react-redux";
+import { addWord } from "../../redax/words/operations";
 
 const ModalAddWord = ({ openModal, closeModal }) => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Modal
@@ -23,7 +27,7 @@ const ModalAddWord = ({ openModal, closeModal }) => {
         <div>ModalAddWord</div>
 
         <Formik
-          initialValues={{ ua: "", en: "", picked: "" }}
+          initialValues={{ ua: "", en: "", isIrregular: false, category: "" }}
           //   validate={(values) => {
           //     const errors = {};
           //     if (!values.email) {
@@ -36,6 +40,11 @@ const ModalAddWord = ({ openModal, closeModal }) => {
           //     return errors;
           //   }}
           onSubmit={(values, { setSubmitting }) => {
+            if (values.category !== "verb") {
+              delete values.isIrregular; // Видаляємо поле, якщо категорія не "verb"
+            }
+            dispatch(addWord(values));
+            closeModal();
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
@@ -49,20 +58,20 @@ const ModalAddWord = ({ openModal, closeModal }) => {
               <Field name="en" type="text" />
               <ErrorMessage name="en" component="div" />
 
-              <Field as="select" name="wordType">
+              <Field as="select" name="category">
                 <option value="">Choose</option>
-                <option value="Verb">Verb</option>
-                <option value="Noun">Noun</option>
-                <option value="Adjective">Adjective</option>
+                <option value="verb">Verb</option>
+                <option value="noun">Noun</option>
+                <option value="adjective">Adjective</option>
               </Field>
-              {values.wordType === "Verb" && (
+              {values.category === "verb" && (
                 <div role="group" aria-labelledby="my-radio-group">
                   <label>
-                    <Field type="radio" name="picked" value="Regular" />
+                    <Field type="radio" name="isIrregular" value={false} />
                     Regular
                   </label>
                   <label>
-                    <Field type="radio" name="picked" value="Irregular" />
+                    <Field type="radio" name="isIrregular" value={true} />
                     Irregular
                   </label>
                 </div>
@@ -80,3 +89,6 @@ const ModalAddWord = ({ openModal, closeModal }) => {
 };
 
 export default ModalAddWord;
+
+// 69aefbdf9aa51aeba9390daf
+// 69aefd469aa51aeba9390dcb

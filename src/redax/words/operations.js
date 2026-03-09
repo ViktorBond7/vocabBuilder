@@ -46,11 +46,29 @@ export const editWord = createAsyncThunk(
   },
 );
 
-export const createWord = createAsyncThunk(
-  "word/createWord",
+export const addWord = createAsyncThunk(
+  "word/addWord",
   async (data, thunkAPI) => {
     try {
       const response = await axios.post("words/create", data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+export const fetchWordsOwn = createAsyncThunk(
+  "words/fetchWordsOwn",
+  async (page, thunkAPI) => {
+    try {
+      const response = await axios.get("words/own", {
+        params: {
+          limit: 5,
+          page,
+        },
+      });
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
