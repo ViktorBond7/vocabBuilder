@@ -45,3 +45,15 @@ export const editWord = createAsyncThunk(
     }
   },
 );
+
+export const createWord = createAsyncThunk(
+  "word/createWord",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.post("words/create", data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);

@@ -49,7 +49,6 @@ const WordList = () => {
 
   return (
     <div>
-      <p>hello</p>
       <Table results={results} onActionClick={onActionClick} />
       <CustomPagination
         totalPages={totalPages}
