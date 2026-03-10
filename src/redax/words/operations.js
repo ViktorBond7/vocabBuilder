@@ -60,12 +60,13 @@ export const addWord = createAsyncThunk(
 
 export const fetchWordsOwn = createAsyncThunk(
   "words/fetchWordsOwn",
-  async (page, thunkAPI) => {
+  async ({ page, keyword = "" }, thunkAPI) => {
     try {
       const response = await axios.get("words/own", {
         params: {
           limit: 5,
           page,
+          keyword,
         },
       });
 

@@ -11,11 +11,22 @@ const wordSlice = createSlice({
   name: "words",
   initialState: {
     items: [],
+    keyword: "",
     totalPages: 0,
     page: 1,
     loading: false,
     error: null,
   },
+  reducers: {
+    setKeyword(state, action) {
+      console.log("setKeyword action.payload", action.payload);
+      state.keyword = action.payload;
+    },
+    setPage(state, action) {
+      state.page = action.payload;
+    },
+  },
+
   extraReducers: (builder) =>
     builder
       .addCase(fetchWords.pending, (state) => {
@@ -54,7 +65,6 @@ const wordSlice = createSlice({
         state.error = false;
       })
       .addCase(deleteWord.fulfilled, (state, action) => {
-       
         state.loading = false;
 
         state.items = state.items.filter(
@@ -98,5 +108,7 @@ const wordSlice = createSlice({
         state.error = true;
       }),
 });
+
+export const { setKeyword, setPage } = wordSlice.actions;
 
 export default wordSlice.reducer;

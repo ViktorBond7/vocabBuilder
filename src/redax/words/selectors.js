@@ -7,3 +7,5 @@ export const selectTotalPages = (state) => state.words.totalPages;
 export const selectPage = (state) => state.words.page;
 
 export const selectError = (state) => state.words.error;
+
+export const selectKeyword = (state) => state.words.keyword;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import ModalAddWord from "../ModalAddWord/ModalAddWord";
+import FilterWords from "../FilterWords/FilterWords";
 
 const Dashboard = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -13,10 +14,14 @@ const Dashboard = () => {
   return (
     <>
       <button onClick={handleModal}>add word</button>
-      <ModalAddWord
-        openModal={isOpenModal}
-        closeModal={() => setIsOpenModal(false)}
-      />
+      {isOpenModal && (
+        <ModalAddWord
+          openModal={isOpenModal}
+          closeModal={() => setIsOpenModal(false)}
+        />
+      )}
+
+      <FilterWords />
     </>
   );
 };

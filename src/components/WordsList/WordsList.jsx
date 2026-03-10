@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
+  selectKeyword,
   selectLoading,
   selectPage,
   selectTotalPages,
@@ -28,6 +29,8 @@ const WordList = () => {
   const [anchorEl, setAnchorEl] = useState(null); // Для позиціонування
   const [isOpenEditForm, setIsOpenEditForm] = useState(false);
 
+  const keyword = useSelector(selectKeyword);
+
   const onActionClick = (event, row) => {
     setAnchorEl(event.currentTarget); // Зберігаємо кнопку, на яку натиснули
     setSelectedRow(row);
@@ -49,8 +52,8 @@ const WordList = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchWordsOwn(currentPage));
-  }, [dispatch, currentPage]);
+    dispatch(fetchWordsOwn({ page: currentPage, keyword }));
+  }, [dispatch, currentPage, keyword]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
