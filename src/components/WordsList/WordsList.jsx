@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectWords } from "../../redax/words/selectors";
+import {
+  selectLoading,
+  selectPage,
+  selectTotalPages,
+  selectWords,
+} from "../../redax/words/selectors";
 import { useEffect, useState } from "react";
 import { fetchWords, fetchWordsOwn } from "../../redax/words/operations";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
@@ -11,7 +16,11 @@ import EditWordForm from "../EditWordForm/EditWordForm";
 
 const WordList = () => {
   const dispatch = useDispatch();
-  const { results, totalPages, page, perPage } = useSelector(selectWords);
+  const results = useSelector(selectWords);
+  const loading = useSelector(selectLoading);
+  const page = useSelector(selectPage);
+  const totalPages = useSelector(selectTotalPages);
+
   const [currentPage, setCurrentPage] = useState(page || 1);
 
   const [IsOpenModalDelete, setOpenModalDelete] = useState(false);
