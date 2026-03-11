@@ -39,16 +39,27 @@ const ModalAddWord = ({ openModal, closeModal }) => {
           //     }
           //     return errors;
           //   }}
-          onSubmit={(values, { setSubmitting }) => {
-            if (values.category !== "verb") {
-              delete values.isIrregular; // Видаляємо поле, якщо категорія не "verb"
+          onSubmit={async (values, { setSubmitting }) => {
+            const wordData = { ...values };
+            if (wordData.category !== "verb") {
+              delete wordData.isIrregular; // Видаляємо поле, якщо категорія не "verb"
             }
-            dispatch(addWord(values));
-            closeModal();
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+            try {
+              await dispatch(addWord(wordData)).unwrap();
+              alert("Word added successfully!");
+
+              closeModal();
+              setTimeout(() => {
+                alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+            } catch (error) {
+              if (error === "Such a word exists") {
+                alert("Таке слово вже існує");
+                return;
+              }
+              alert("Failed to add word: " + error);
+            }
           }}
         >
           {({ isSubmitting, values }) => (

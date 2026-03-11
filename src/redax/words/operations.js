@@ -53,7 +53,11 @@ export const addWord = createAsyncThunk(
       const response = await axios.post("words/create", data);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message ||
+          error.message ||
+          "Something went wrong",
+      );
     }
   },
 );

@@ -62,11 +62,13 @@ const WordList = () => {
   return (
     <div>
       <Table results={results} onActionClick={onActionClick} />
-      <CustomPagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      {results.length > 0 && (
+        <CustomPagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
 
       {anchorEl && (
         <ActionMenu

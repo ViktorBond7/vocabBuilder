@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import ModalAddWord from "../ModalAddWord/ModalAddWord";
 import FilterWords from "../FilterWords/FilterWords";
+import Categories from "../Categories/Categories";
 
 const Dashboard = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -22,6 +23,7 @@ const Dashboard = () => {
       )}
 
       <FilterWords />
+      <Categories />
     </>
   );
 };
