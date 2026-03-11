@@ -64,15 +64,29 @@ export const addWord = createAsyncThunk(
 
 export const fetchWordsOwn = createAsyncThunk(
   "words/fetchWordsOwn",
-  async ({ page, keyword = "" }, thunkAPI) => {
+  async ({ page, keyword = "", category = "" }, thunkAPI) => {
     try {
       const response = await axios.get("words/own", {
         params: {
           limit: 5,
           page,
           keyword,
+          category,
         },
       });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+export const fetchCategories = createAsyncThunk(
+  "words/fetchCategories",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get("words/categories");
 
       return response.data;
     } catch (error) {

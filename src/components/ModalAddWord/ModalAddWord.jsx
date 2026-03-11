@@ -100,6 +100,3 @@ const ModalAddWord = ({ openModal, closeModal }) => {
 };
 
 export default ModalAddWord;
-
-// 69aefbdf9aa51aeba9390daf
-// 69aefd469aa51aeba9390dcb

@@ -8,4 +8,6 @@ export const selectPage = (state) => state.words.page;
 
 export const selectError = (state) => state.words.error;
 
-export const selectKeyword = (state) => state.words.keyword;
+export const selectFilters = (state) => state.words.filters;
+
+export const selectCategories = (state) => state.words.categories;

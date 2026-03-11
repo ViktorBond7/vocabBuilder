@@ -3,6 +3,7 @@ import {
   addWord,
   deleteWord,
   editWord,
+  fetchCategories,
   fetchWords,
   fetchWordsOwn,
 } from "./operations";
@@ -11,7 +12,8 @@ const wordSlice = createSlice({
   name: "words",
   initialState: {
     items: [],
-    keyword: "",
+    categories: [],
+    filters: { keyword: "", category: "" },
     totalPages: 0,
     page: 1,
     loading: false,
@@ -19,11 +21,13 @@ const wordSlice = createSlice({
   },
   reducers: {
     setKeyword(state, action) {
-      console.log("setKeyword action.payload", action.payload);
-      state.keyword = action.payload;
+      state.filters.keyword = action.payload;
     },
     setPage(state, action) {
       state.page = action.payload;
+    },
+    setCategory(state, action) {
+      state.filters.category = action.payload;
     },
   },
 
@@ -106,9 +110,22 @@ const wordSlice = createSlice({
       .addCase(addWord.rejected, (state) => {
         state.loading = false;
         state.error = true;
+      })
+
+      .addCase(fetchCategories.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(fetchCategories.fulfilled, (state, action) => {
+        state.loading = false;
+        state.categories = action.payload;
+      })
+      .addCase(fetchCategories.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
       }),
 });
 
-export const { setKeyword, setPage } = wordSlice.actions;
+export const { setKeyword, setPage, setCategory } = wordSlice.actions;
 
 export default wordSlice.reducer;

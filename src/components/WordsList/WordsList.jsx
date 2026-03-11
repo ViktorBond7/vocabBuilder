@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectKeyword,
+  selectFilters,
   selectLoading,
   selectPage,
   selectTotalPages,
   selectWords,
 } from "../../redax/words/selectors";
 import { useEffect, useState } from "react";
-import { fetchWords, fetchWordsOwn } from "../../redax/words/operations";
+import {
+  fetchCategories,
+  fetchWords,
+  fetchWordsOwn,
+} from "../../redax/words/operations";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
 import Table from "../../components/Table/Table";
 
@@ -29,7 +33,7 @@ const WordList = () => {
   const [anchorEl, setAnchorEl] = useState(null); // Для позиціонування
   const [isOpenEditForm, setIsOpenEditForm] = useState(false);
 
-  const keyword = useSelector(selectKeyword);
+  const { keyword, category } = useSelector(selectFilters);
 
   const onActionClick = (event, row) => {
     setAnchorEl(event.currentTarget); // Зберігаємо кнопку, на яку натиснули
@@ -52,12 +56,23 @@ const WordList = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchWordsOwn({ page: currentPage, keyword }));
-  }, [dispatch, currentPage, keyword]);
+    dispatch(fetchWordsOwn({ page: currentPage, keyword, category }));
+  }, [dispatch, currentPage, keyword, category]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  // useEffect(() => {
+  //   async () => {
+  //     const categories = await fetchCategories();
+  //     dispatch(categories);
+  //   };
+  // }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   return (
     <div>
