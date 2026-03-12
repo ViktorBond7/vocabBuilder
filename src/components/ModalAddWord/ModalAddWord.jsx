@@ -1,11 +1,14 @@
 import Modal from "react-modal";
 import css from "./ModalAddWord.module.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addWord } from "../../redax/words/operations";
+import CategorySelect from "../Categories/CategorySelect";
+import { selectCategories } from "../../redax/words/selectors";
 
 const ModalAddWord = ({ openModal, closeModal }) => {
   const dispatch = useDispatch();
+  const categories = useSelector(selectCategories);
 
   return (
     <>
@@ -69,12 +72,12 @@ const ModalAddWord = ({ openModal, closeModal }) => {
               <Field name="en" type="text" />
               <ErrorMessage name="en" component="div" />
 
-              <Field as="select" name="category">
-                <option value="">Choose</option>
-                <option value="verb">Verb</option>
-                <option value="noun">Noun</option>
-                <option value="adjective">Adjective</option>
+              <Field name="category">
+                {({ children }) => (
+                  <CategorySelect categories={categories} {...children} />
+                )}
               </Field>
+
               {values.category === "verb" && (
                 <div role="group" aria-labelledby="my-radio-group">
                   <label>
@@ -100,3 +103,12 @@ const ModalAddWord = ({ openModal, closeModal }) => {
 };
 
 export default ModalAddWord;
+
+{
+  /* <Field as="select" name="category">
+                <option value="">Choose</option>
+                <option value="verb">Verb</option>
+                <option value="noun">Noun</option>
+                <option value="adjective">Adjective</option>
+              </Field> */
+}
