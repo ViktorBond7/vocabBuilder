@@ -13,7 +13,7 @@ const wordSlice = createSlice({
   initialState: {
     items: [],
     categories: [],
-    filters: { keyword: "", category: "" },
+    filters: { keyword: "", category: "", isIrregular: null },
     totalPages: 0,
     page: 1,
     loading: false,
@@ -28,6 +28,9 @@ const wordSlice = createSlice({
     },
     setCategory(state, action) {
       state.filters.category = action.payload;
+    },
+    setIsIrregular(state, action) {
+      state.filters.isIrregular = action.payload;
     },
   },
 
@@ -126,6 +129,7 @@ const wordSlice = createSlice({
       }),
 });
 
-export const { setKeyword, setPage, setCategory } = wordSlice.actions;
+export const { setKeyword, setPage, setCategory, setIsIrregular } =
+  wordSlice.actions;
 
 export default wordSlice.reducer;

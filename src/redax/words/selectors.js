@@ -11,3 +11,5 @@ export const selectError = (state) => state.words.error;
 export const selectFilters = (state) => state.words.filters;
 
 export const selectCategories = (state) => state.words.categories;
+
+export const selectIsIrregular = (state) => state.words.filters.isIrregular;

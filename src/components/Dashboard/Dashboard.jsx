@@ -2,15 +2,22 @@ import { useState } from "react";
 import ModalAddWord from "../ModalAddWord/ModalAddWord";
 import FilterWords from "../FilterWords/FilterWords";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory, setPage } from "../../redax/words/slice";
+import { setCategory, setIsIrregular, setPage } from "../../redax/words/slice";
 import CategorySelect from "../Categories/CategorySelect";
-import { selectCategories, selectFilters } from "../../redax/words/selectors";
+import {
+  selectCategories,
+  selectFilters,
+  selectIsIrregular,
+} from "../../redax/words/selectors";
+import RadioButtonGroup from "../RadioButtonGroup/RadioButtonGroup";
 
 const Dashboard = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const currentCategory = useSelector(selectFilters).category;
   const categories = useSelector(selectCategories);
+  const currentIsIrregular = useSelector(selectIsIrregular);
+
   const dispatch = useDispatch();
 
   const handleModal = () => {
@@ -41,6 +48,12 @@ const Dashboard = () => {
         onChange={handleChangeCategory}
         name="category"
       />
+      {currentCategory === "verb" && (
+        <RadioButtonGroup
+          onChange={(val) => dispatch(setIsIrregular(val.target.value))}
+          value={currentIsIrregular}
+        />
+      )}
     </>
   );
 };

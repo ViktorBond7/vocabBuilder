@@ -64,7 +64,10 @@ export const addWord = createAsyncThunk(
 
 export const fetchWordsOwn = createAsyncThunk(
   "words/fetchWordsOwn",
-  async ({ page, keyword = "", category = "" }, thunkAPI) => {
+  async (
+    { page, keyword = "", category = "", isIrregular = null },
+    thunkAPI,
+  ) => {
     try {
       const response = await axios.get("words/own", {
         params: {
@@ -72,6 +75,7 @@ export const fetchWordsOwn = createAsyncThunk(
           page,
           keyword,
           category,
+          isIrregular,
         },
       });
 

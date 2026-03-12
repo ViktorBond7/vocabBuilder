@@ -18,6 +18,7 @@ import Table from "../../components/Table/Table";
 import ModalDeleteWord from "../ModalDeleteWord/ModalDeleteWord";
 import ActionMenu from "../ActionMenu/ActionMenu";
 import EditWordForm from "../EditWordForm/EditWordForm";
+import { setIsIrregular } from "../../redax/words/slice";
 
 const WordList = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const WordList = () => {
   const [anchorEl, setAnchorEl] = useState(null); // Для позиціонування
   const [isOpenEditForm, setIsOpenEditForm] = useState(false);
 
-  const { keyword, category } = useSelector(selectFilters);
+  const { keyword, category, isIrregular } = useSelector(selectFilters);
 
   const onActionClick = (event, row) => {
     setAnchorEl(event.currentTarget); // Зберігаємо кнопку, на яку натиснули
@@ -56,12 +57,18 @@ const WordList = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchWordsOwn({ page: currentPage, keyword, category }));
-  }, [dispatch, currentPage, keyword, category]);
+    dispatch(
+      fetchWordsOwn({ page: currentPage, keyword, category, isIrregular }),
+    );
+  }, [dispatch, currentPage, keyword, category, isIrregular]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    dispatch(setIsIrregular(null));
+  }, [dispatch, category]);
 
   // useEffect(() => {
   //   async () => {

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addWord } from "../../redax/words/operations";
 import CategorySelect from "../Categories/CategorySelect";
 import { selectCategories } from "../../redax/words/selectors";
+import RadioButtonGroup from "../RadioButtonGroup/RadioButtonGroup";
 
 const ModalAddWord = ({ openModal, closeModal }) => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const ModalAddWord = ({ openModal, closeModal }) => {
         <div>ModalAddWord</div>
 
         <Formik
-          initialValues={{ ua: "", en: "", isIrregular: false, category: "" }}
+          initialValues={{ ua: "", en: "", isIrregular: null, category: "" }}
           //   validate={(values) => {
           //     const errors = {};
           //     if (!values.email) {
@@ -44,6 +45,7 @@ const ModalAddWord = ({ openModal, closeModal }) => {
           //   }}
           onSubmit={async (values, { setSubmitting }) => {
             const wordData = { ...values };
+
             if (wordData.category !== "verb") {
               delete wordData.isIrregular; // Видаляємо поле, якщо категорія не "verb"
             }
@@ -73,21 +75,16 @@ const ModalAddWord = ({ openModal, closeModal }) => {
               <ErrorMessage name="en" component="div" />
 
               <Field name="category">
-                {({ children }) => (
-                  <CategorySelect categories={categories} {...children} />
+                {({ field }) => (
+                  <CategorySelect categories={categories} {...field} />
                 )}
               </Field>
 
               {values.category === "verb" && (
-                <div role="group" aria-labelledby="my-radio-group">
-                  <label>
-                    <Field type="radio" name="isIrregular" value={false} />
-                    Regular
-                  </label>
-                  <label>
-                    <Field type="radio" name="isIrregular" value={true} />
-                    Irregular
-                  </label>
+                <div>
+                  <Field name="isIrregular">
+                    {({ field }) => <RadioButtonGroup {...field} />}
+                  </Field>
                 </div>
               )}
 
@@ -111,4 +108,19 @@ export default ModalAddWord;
                 <option value="noun">Noun</option>
                 <option value="adjective">Adjective</option>
               </Field> */
+}
+
+{
+  /* {values.category === "verb" && (
+                <div role="group" aria-labelledby="my-radio-group">
+                  <label>
+                    <Field type="radio" name="isIrregular" value={false} />
+                    Regular
+                  </label>
+                  <label>
+                    <Field type="radio" name="isIrregular" value={true} />
+                    Irregular
+                  </label>
+                </div>
+              )} */
 }
