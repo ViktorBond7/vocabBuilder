@@ -10,7 +10,6 @@ const Table = ({ results, onActionClick }) => {
       name: "word",
       selector: (row) => row.ua,
       sortable: true,
-      width: "300px",
 
       conditionalCellStyles: [
         {

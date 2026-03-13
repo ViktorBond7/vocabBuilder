@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import css from "./WordsList.module.scss";
 import {
   selectFilters,
   selectLoading,
@@ -82,7 +83,7 @@ const WordList = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={css.container}>
       <Table results={results} onActionClick={onActionClick} />
       {results.length > 0 && (
         <CustomPagination
