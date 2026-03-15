@@ -1,10 +1,14 @@
 import DataTable from "react-data-table-component";
+import { useLocation } from "react-router-dom";
 // import ModalDeleteWord from "../ModalDeleteWord/ModalDeleteWord";
 // import { useState } from "react";
 // import ActionMenu from "../ActionMenu/ActionMenu";
 // import EditWordForm from "../EditWordForm/EditWordForm";
 
 const Table = ({ results, onActionClick }) => {
+  const param = useLocation();
+  console.log("Table: param", param.pathname);
+
   const collums = [
     {
       name: "word",
@@ -31,10 +35,18 @@ const Table = ({ results, onActionClick }) => {
       selector: (row) => row.category,
     },
     {
-      name: "cat",
-      cell: (row) => (
-        <button onClick={(e) => onActionClick(e, row)}>...</button>
-      ),
+      name: "",
+      cell: (row) => {
+        if (param.pathname === "/recommend") {
+          return (
+            <button onClick={(e) => onActionClick(e, row)}>
+              Add to dictionary +
+            </button>
+          );
+        }
+
+        return <button onClick={(e) => onActionClick(e, row)}>...</button>;
+      },
     },
   ];
 

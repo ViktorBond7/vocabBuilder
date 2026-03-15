@@ -10,6 +10,9 @@ import { refreshUser } from "./redax/auth/operations";
 import { selectIsRefreshing } from "./redax/auth/selectors";
 import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
+import DictionaryPage from "./pages/DictionaryPage/DictionaryPage";
+import RecommendPage from "./pages/RecommendPage/RecommendPage";
+import TrainingPage from "./pages/TrainingPage/TrainingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,7 +57,19 @@ function App() {
         <Route
           path="/dictionary"
           element={
-            <PrivateRoute redirectTo="/login" component={<WordList />} />
+            <PrivateRoute redirectTo="/login" component={<DictionaryPage />} />
+          }
+        />
+        <Route
+          path="/recommend"
+          element={
+            <PrivateRoute redirectTo="/login" component={<RecommendPage />} />
+          }
+        />
+        <Route
+          path="/training"
+          element={
+            <PrivateRoute redirectTo="/login" component={<TrainingPage />} />
           }
         />
       </Routes>
@@ -63,3 +78,4 @@ function App() {
 }
 
 export default App;
+// Training page

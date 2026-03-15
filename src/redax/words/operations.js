@@ -5,12 +5,18 @@ import { selectUserToken } from "../auth/selectors";
 
 export const fetchWords = createAsyncThunk(
   "words/fetchAll",
-  async (page, thunkAPI) => {
+  async (
+    { page, keyword = "", category = "", isIrregular = null },
+    thunkAPI,
+  ) => {
     try {
       const response = await axios.get("words/all", {
         params: {
           limit: 5,
           page,
+          keyword,
+          category,
+          isIrregular,
         },
       });
 
@@ -54,6 +60,23 @@ export const addWord = createAsyncThunk(
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
+        error.response?.data?.message ||
+          error.message ||
+          "Something went wrong",
+      );
+    }
+  },
+);
+
+export const addWordWithRecommend = createAsyncThunk(
+  "words/addWordWithRecommend",
+  async (_id, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`words/add/${_id}`);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
         error.response?.data?.message ||
           error.message ||
           "Something went wrong",
