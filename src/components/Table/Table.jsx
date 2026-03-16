@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 
 const Table = ({ results, onActionClick }) => {
   const param = useLocation();
-  console.log("Table: param", param.pathname);
 
   const collums = [
     {

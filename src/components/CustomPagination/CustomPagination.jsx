@@ -4,6 +4,7 @@ import css from "./CustomPagination.module.scss";
 
 const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
   // 1. Якщо сторінок 0 або 1, пагінація не потрібна
+
   if (totalPages <= 1) return null;
 
   const getPages = () => {

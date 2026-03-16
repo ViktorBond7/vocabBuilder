@@ -8,27 +8,27 @@ import {
   selectWords,
 } from "../../redax/words/selectors";
 import { useEffect, useState } from "react";
-import {
-  fetchCategories,
-  // fetchWords,
-  // fetchWordsOwn,
-} from "../../redax/words/operations";
+import { fetchCategories } from "../../redax/words/operations";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
 import Table from "../../components/Table/Table";
 
-// import ModalDeleteWord from "../ModalDeleteWord/ModalDeleteWord";
-// import ActionMenu from "../ActionMenu/ActionMenu";
-// import EditWordForm from "../EditWordForm/EditWordForm";
-import { setIsIrregular } from "../../redax/words/slice";
+import {
+  resetPageState,
+  setIsIrregular,
+  setPage,
+} from "../../redax/words/slice";
+import { useLocation } from "react-router-dom";
 
 const WordList = ({ fetchAction, setAnchorEl = null, onSelectWord }) => {
   const dispatch = useDispatch();
+
   const results = useSelector(selectWords);
+
   // const loading = useSelector(selectLoading);
-  const page = useSelector(selectPage);
+
   const totalPages = useSelector(selectTotalPages);
 
-  const [currentPage, setCurrentPage] = useState(page || 1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { keyword, category, isIrregular } = useSelector(selectFilters);
 
@@ -43,7 +43,7 @@ const WordList = ({ fetchAction, setAnchorEl = null, onSelectWord }) => {
     dispatch(
       fetchAction({ page: currentPage, keyword, category, isIrregular }),
     );
-  }, [dispatch, currentPage, keyword, category, isIrregular]);
+  }, [dispatch, currentPage, keyword, category, isIrregular, fetchAction]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

@@ -7,6 +7,7 @@ import { useState } from "react";
 import ActionMenu from "../../components/ActionMenu/ActionMenu";
 import ModalDeleteWord from "../../components/ModalDeleteWord/ModalDeleteWord";
 import EditWordForm from "../../components/EditWordForm/EditWordForm";
+import { Toaster } from "react-hot-toast";
 
 const DictionaryPage = () => {
   const [IsOpenModalDelete, setOpenModalDelete] = useState(false);
@@ -63,6 +64,7 @@ const DictionaryPage = () => {
           row={selectedRow}
         />
       )}
+      <Toaster />
     </Container>
   );
 };

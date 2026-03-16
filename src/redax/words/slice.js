@@ -32,6 +32,11 @@ const wordSlice = createSlice({
     setIsIrregular(state, action) {
       state.filters.isIrregular = action.payload;
     },
+    resetPageState(state) {
+      state.page = 1;
+      state.items = [];
+      state.totalPages = 0;
+    },
   },
 
   extraReducers: (builder) =>
@@ -56,7 +61,6 @@ const wordSlice = createSlice({
         state.error = false;
       })
       .addCase(fetchWordsOwn.fulfilled, (state, action) => {
-        console.log("fetchWordsOwn.fulfilled action.payload", action.payload);
         state.loading = false;
         state.items = action.payload.results;
         state.totalPages = action.payload.totalPages;
@@ -129,7 +133,12 @@ const wordSlice = createSlice({
       }),
 });
 
-export const { setKeyword, setPage, setCategory, setIsIrregular } =
-  wordSlice.actions;
+export const {
+  setKeyword,
+  setPage,
+  setCategory,
+  setIsIrregular,
+  resetPageState,
+} = wordSlice.actions;
 
 export default wordSlice.reducer;

@@ -6,6 +6,7 @@ import { addWord } from "../../redax/words/operations";
 import CategorySelect from "../Categories/CategorySelect";
 import { selectCategories } from "../../redax/words/selectors";
 import RadioButtonGroup from "../RadioButtonGroup/RadioButtonGroup";
+import toast from "react-hot-toast";
 
 const ModalAddWord = ({ openModal, closeModal }) => {
   const dispatch = useDispatch();
@@ -32,17 +33,19 @@ const ModalAddWord = ({ openModal, closeModal }) => {
 
         <Formik
           initialValues={{ ua: "", en: "", isIrregular: null, category: "" }}
-          //   validate={(values) => {
-          //     const errors = {};
-          //     if (!values.email) {
-          //       errors.email = "Required";
-          //     } else if (
-          //       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          //     ) {
-          //       errors.email = "Invalid email address";
-          //     }
-          //     return errors;
-          //   }}
+          validate={(values) => {
+            const errors = {};
+            if (!values.email) {
+              errors.email = "Required";
+            } else if (
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            ) {
+              errors.email = "Invalid email address";
+            }
+            console.log(errors);
+            toast.error("Fill out the form");
+            return errors;
+          }}
           onSubmit={async (values, { setSubmitting }) => {
             const wordData = { ...values };
 
