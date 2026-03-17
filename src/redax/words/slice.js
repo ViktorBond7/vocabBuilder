@@ -22,20 +22,25 @@ const wordSlice = createSlice({
   reducers: {
     setKeyword(state, action) {
       state.filters.keyword = action.payload;
+      state.page = 1;
     },
     setPage(state, action) {
       state.page = action.payload;
     },
     setCategory(state, action) {
       state.filters.category = action.payload;
+      state.filters.isIrregular = null;
+      state.page = 1;
     },
     setIsIrregular(state, action) {
       state.filters.isIrregular = action.payload;
+      state.page = 1;
     },
     resetPageState(state) {
       state.page = 1;
       state.items = [];
       state.totalPages = 0;
+      state.filters = { keyword: "", category: "", isIrregular: null };
     },
   },
 

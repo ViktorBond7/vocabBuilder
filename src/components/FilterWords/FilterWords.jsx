@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import css from "./FilterWords.module.scss";
-import { setKeyword, setPage } from "../../redax/words/slice";
+import { resetPageState, setKeyword, setPage } from "../../redax/words/slice";
 // import { selectKeyword } from "../../redax/words/selectors";
 import { useState, useEffect } from "react";
 
@@ -12,7 +12,6 @@ const FilterWords = () => {
     // 1. Встановлюємо таймер
     const handler = setTimeout(() => {
       dispatch(setKeyword(inputValue)); // оновлюємо Redux через 500мс
-      dispatch(setPage(1)); // скидаємо сторінку при пошуку
     }, 300);
 
     // 2. Очищуємо таймер, якщо користувач знову почав друкувати

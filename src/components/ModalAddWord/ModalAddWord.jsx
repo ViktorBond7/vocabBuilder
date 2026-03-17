@@ -33,19 +33,17 @@ const ModalAddWord = ({ openModal, closeModal }) => {
 
         <Formik
           initialValues={{ ua: "", en: "", isIrregular: null, category: "" }}
-          validate={(values) => {
-            const errors = {};
-            if (!values.email) {
-              errors.email = "Required";
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = "Invalid email address";
-            }
-            console.log(errors);
-            toast.error("Fill out the form");
-            return errors;
-          }}
+          // validate={(values) => {
+          //   const errors = {};
+          //   if (!values.ua) {
+          //     errors.ua = "Required";
+          //   } else if (!/^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/u.test(values.ua)) {
+          //     errors.ua = "Invalid ua";
+          //   }
+          //   console.log(errors);
+          //   toast.error(errors || "Fill out the form");
+          //   return errors;
+          // }}
           onSubmit={async (values, { setSubmitting }) => {
             const wordData = { ...values };
 
@@ -57,13 +55,9 @@ const ModalAddWord = ({ openModal, closeModal }) => {
               alert("Word added successfully!");
 
               closeModal();
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
             } catch (error) {
               if (error === "Such a word exists") {
-                alert("Таке слово вже існує");
+                toast.error("Such a word exists");
                 return;
               }
               alert("Failed to add word: " + error);
@@ -103,27 +97,3 @@ const ModalAddWord = ({ openModal, closeModal }) => {
 };
 
 export default ModalAddWord;
-
-{
-  /* <Field as="select" name="category">
-                <option value="">Choose</option>
-                <option value="verb">Verb</option>
-                <option value="noun">Noun</option>
-                <option value="adjective">Adjective</option>
-              </Field> */
-}
-
-{
-  /* {values.category === "verb" && (
-                <div role="group" aria-labelledby="my-radio-group">
-                  <label>
-                    <Field type="radio" name="isIrregular" value={false} />
-                    Regular
-                  </label>
-                  <label>
-                    <Field type="radio" name="isIrregular" value={true} />
-                    Irregular
-                  </label>
-                </div>
-              )} */
-}

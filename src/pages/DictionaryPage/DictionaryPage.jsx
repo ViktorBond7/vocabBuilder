@@ -3,17 +3,19 @@ import WordList from "../../components/WordsList/WordsList";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Container from "../../components/Container/Container";
 import { fetchWordsOwn } from "../../redax/words/operations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActionMenu from "../../components/ActionMenu/ActionMenu";
 import ModalDeleteWord from "../../components/ModalDeleteWord/ModalDeleteWord";
 import EditWordForm from "../../components/EditWordForm/EditWordForm";
 import { Toaster } from "react-hot-toast";
+import { resetPageState } from "../../redax/words/slice";
 
 const DictionaryPage = () => {
   const [IsOpenModalDelete, setOpenModalDelete] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null); // Для позиціонування
   const [isOpenEditForm, setIsOpenEditForm] = useState(false);
+  const dispatch = useDispatch();
 
   const handleOpenModal = (target) => {
     setAnchorEl(null);
@@ -29,6 +31,12 @@ const DictionaryPage = () => {
     target(false); // Закриваємо модальне вікно
     setSelectedRow(null); // Скидаємо вибраний рядок
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetPageState());
+    };
+  }, [dispatch]);
 
   return (
     <Container>

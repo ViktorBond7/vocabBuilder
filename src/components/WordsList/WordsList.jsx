@@ -17,18 +17,16 @@ import {
   setIsIrregular,
   setPage,
 } from "../../redax/words/slice";
-import { useLocation } from "react-router-dom";
 
 const WordList = ({ fetchAction, setAnchorEl = null, onSelectWord }) => {
   const dispatch = useDispatch();
 
   const results = useSelector(selectWords);
+  const page = useSelector(selectPage);
 
   // const loading = useSelector(selectLoading);
 
   const totalPages = useSelector(selectTotalPages);
-
-  const [currentPage, setCurrentPage] = useState(1);
 
   const { keyword, category, isIrregular } = useSelector(selectFilters);
 
@@ -40,18 +38,12 @@ const WordList = ({ fetchAction, setAnchorEl = null, onSelectWord }) => {
   };
 
   useEffect(() => {
-    dispatch(
-      fetchAction({ page: currentPage, keyword, category, isIrregular }),
-    );
-  }, [dispatch, currentPage, keyword, category, isIrregular, fetchAction]);
+    dispatch(fetchAction({ page, keyword, category, isIrregular }));
+  }, [dispatch, keyword, category, isIrregular, fetchAction, page]);
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const handlePageChange = (newPage) => {
+    dispatch(setPage(newPage));
   };
-
-  useEffect(() => {
-    dispatch(setIsIrregular(null));
-  }, [dispatch, category]);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -63,7 +55,7 @@ const WordList = ({ fetchAction, setAnchorEl = null, onSelectWord }) => {
       {results.length > 0 && (
         <CustomPagination
           totalPages={totalPages}
-          currentPage={currentPage}
+          currentPage={page}
           onPageChange={handlePageChange}
         />
       )}
