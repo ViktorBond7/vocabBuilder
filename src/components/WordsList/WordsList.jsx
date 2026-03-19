@@ -7,18 +7,14 @@ import {
   selectTotalPages,
   selectWords,
 } from "../../redax/words/selectors";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchCategories } from "../../redax/words/operations";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
 import Table from "../../components/Table/Table";
 
-import {
-  resetPageState,
-  setIsIrregular,
-  setPage,
-} from "../../redax/words/slice";
+import { setPage } from "../../redax/words/slice";
 
-const WordList = ({ fetchAction, setAnchorEl = null, onSelectWord }) => {
+const WordList = ({ fetchAction, onActionClick }) => {
   const dispatch = useDispatch();
 
   const results = useSelector(selectWords);
@@ -30,16 +26,16 @@ const WordList = ({ fetchAction, setAnchorEl = null, onSelectWord }) => {
 
   const { keyword, category, isIrregular } = useSelector(selectFilters);
 
-  const onActionClick = (event, row) => {
-    if (setAnchorEl) {
-      setAnchorEl(event.currentTarget); // Встановлюємо елемент для позиціонування меню
-    }
-    onSelectWord(row);
-  };
-
   useEffect(() => {
-    dispatch(fetchAction({ page, keyword, category, isIrregular }));
-  }, [dispatch, keyword, category, isIrregular, fetchAction, page]);
+    dispatch(
+      fetchAction({
+        page,
+        keyword,
+        category,
+        isIrregular,
+      }),
+    );
+  }, [dispatch, keyword, category, isIrregular, page]);
 
   const handlePageChange = (newPage) => {
     dispatch(setPage(newPage));

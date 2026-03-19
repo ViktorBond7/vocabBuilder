@@ -25,6 +25,7 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
         pages.push("...");
       }
     }
+
     return pages;
   };
 

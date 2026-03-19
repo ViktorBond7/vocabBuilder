@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import css from "./FilterWords.module.scss";
-import { resetPageState, setKeyword, setPage } from "../../redax/words/slice";
-// import { selectKeyword } from "../../redax/words/selectors";
+import { setKeyword } from "../../redax/words/slice";
 import { useState, useEffect } from "react";
 
 const FilterWords = () => {
