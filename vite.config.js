@@ -7,4 +7,14 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Додаємо цей рядок, щоб прибрати warning про застарілий API
+        api: "modern-compiler",
+
+        additionalData: `@use "./src/base/variables" as *;`,
+      },
+    },
+  },
 });

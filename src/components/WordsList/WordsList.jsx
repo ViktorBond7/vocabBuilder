@@ -12,13 +12,27 @@ import { fetchCategories } from "../../redax/words/operations";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
 import Table from "../../components/Table/Table";
 
-import { setPage } from "../../redax/words/slice";
+import { resetPageState, setPage } from "../../redax/words/slice";
+import usePageSync from "../../hooks/usePageSync";
 
 const WordList = ({ fetchAction, onActionClick }) => {
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    return () => {
+      dispatch(resetPageState());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
   const results = useSelector(selectWords);
   const page = useSelector(selectPage);
+
+  console.log("results", results.length);
+  console.log("page", page);
 
   // const loading = useSelector(selectLoading);
 
@@ -40,10 +54,6 @@ const WordList = ({ fetchAction, onActionClick }) => {
   const handlePageChange = (newPage) => {
     dispatch(setPage(newPage));
   };
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
 
   return (
     <div className={css.container}>

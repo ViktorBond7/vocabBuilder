@@ -1,0 +1,10 @@
+export const BREAKPOINTS = {
+  MOBILE: 375,
+  TABLET: 768,
+  DESKTOP: 1440,
+};
+
+export const THEME = {
+  PRIMARY: '#8da399',
+  SECONDARY: '#fc832c',
+};

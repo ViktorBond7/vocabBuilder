@@ -55,8 +55,6 @@ const wordSlice = createSlice({
       })
 
       .addCase(fetchWordsOwn.fulfilled, (state, action) => {
-        console.log("actionOwn", action);
-
         state.loading = false;
         state.items = action.payload.results;
         state.totalPages = action.payload.totalPages;

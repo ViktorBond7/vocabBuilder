@@ -1,3 +1,5 @@
+@use "../../base/variables.scss" as *;
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -9,4 +11,31 @@
 }
 .activeLink {
   color: green;
+}
+.navigation {
+  display: none;
+  @include tablet {
+    display: flex;
+    gap: 25px;
+  }
+}
+
+.burgerBtn {
+  border: none;
+  background-color: inherit;
+  @include tablet {
+    display: none;
+  }
+}
+
+.icon {
+  width: 40px;
+  height: 28px;
+  stroke: var(--black);
+}
+.logOutBtn {
+  display: none;
+  @include tablet {
+    display: flex;
+  }
 }
