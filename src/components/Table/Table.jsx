@@ -1,21 +1,21 @@
 import DataTable from "react-data-table-component";
 import { useLocation } from "react-router-dom";
 import css from "./Table.module.scss";
-// import ModalDeleteWord from "../ModalDeleteWord/ModalDeleteWord";
-// import { useState } from "react";
-// import ActionMenu from "../ActionMenu/ActionMenu";
-// import EditWordForm from "../EditWordForm/EditWordForm";
+import useMatchMedia from "../../hooks/useMatchMedia";
+import IconSvg from "../IconSvg/IconSvg";
 
 const Table = ({ results, onActionClick }) => {
   const param = useLocation();
-
+  const { isMobile, isTablet, isDesktop } = useMatchMedia();
   const collums = [
     {
       name: "word",
       selector: (row) => row.ua,
       sortable: true,
-      minWidth: "90px",
-      // minWidth: "50px",
+      minWidth: "85px",
+      grow: 2,
+
+      wrap: true,
 
       // conditionalCellStyles: [
       //   {
@@ -32,42 +32,63 @@ const Table = ({ results, onActionClick }) => {
       name: "translation",
       selector: (row) => row.en,
       sortable: true,
-      minWidth: "90px",
+      minWidth: "85px",
+      wrap: true,
+      grow: 2,
     },
     {
       name: "category",
       selector: (row) => row.category,
-      minWidth: "98px",
+      minWidth: "85px",
+      wrap: true,
+      grow: 1,
     },
     {
       name: "",
       minWidth: "38px",
+      grow: 1,
+      wrap: false,
       cell: (row) => {
         if (param.pathname === "/recommend") {
           return (
-            <button onClick={(e) => onActionClick(e, row)}>
-              Add to dictionary +
+            <button
+              className={css.btnAr}
+              onClick={(e) => onActionClick(e, row)}
+            >
+              {isMobile ? (
+                <IconSvg name="icon-switch-horizontal" className={css.iconAr} />
+              ) : (
+                <div className={css.btnAdd}>
+                  Add to dictionary
+                  <IconSvg
+                    name="icon-switch-horizontal"
+                    className={css.iconAr}
+                  />
+                </div>
+              )}
             </button>
           );
         }
 
-        return <button onClick={(e) => onActionClick(e, row)}>...</button>;
+        return (
+          <button className={css.btnAr} onClick={(e) => onActionClick(e, row)}>
+            ...
+          </button>
+        );
       },
     },
   ];
 
   const customStyles = {
     header: {
-      style: {
-        // minHeight: "56px",
-        // backgroundColor: "red",
-      },
+      style: {},
     },
+
     headRow: {
       style: {
         borderTopStyle: "solid",
         borderTopWidth: "1px",
-        borderTopColor: "red",
+        borderTopColor: "#dbdbdb",
       },
     },
     headCells: {
@@ -75,7 +96,7 @@ const Table = ({ results, onActionClick }) => {
         "&:not(:last-of-type)": {
           borderRightStyle: "solid",
           borderRightWidth: "1px",
-          borderRightColor: "red",
+          borderRightColor: "#dbdbdb",
         },
       },
     },
@@ -84,7 +105,7 @@ const Table = ({ results, onActionClick }) => {
         "&:not(:last-of-type)": {
           borderRightStyle: "solid",
           borderRightWidth: "1px",
-          borderRightColor: "red",
+          borderRightColor: "#dbdbdb",
         },
         "&:last-child": {
           overflow: "visible", // Дозволяємо меню виходити за межі комірки

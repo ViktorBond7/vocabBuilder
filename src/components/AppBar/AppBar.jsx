@@ -4,15 +4,20 @@ import { selectIsLoggedIn } from "../../redax/auth/selectors";
 import Navigation from "../Navigation/Navigation";
 import UserMenu from "../UserMenu/UserMenu";
 // import AuthNav from "../AuthNav/AuthNav";
+import Container from "../Container/Container";
 
 const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
     <header className={css.header}>
-      <Navigation />
-      {/* {isLoggedIn ? <UserMenu /> : <AuthNav />} */}
-      {isLoggedIn && <UserMenu />}
+      <Container>
+        <div className={css.wraper}>
+          <Navigation />
+          {/* {isLoggedIn ? <UserMenu /> : <AuthNav />} */}
+          {isLoggedIn && <UserMenu />}
+        </div>
+      </Container>
     </header>
   );
 };

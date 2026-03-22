@@ -2,5 +2,31 @@
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  width: 344px;
+  min-width: 300px;
+
+  width: 100%;
+  // overflow: hidden;
+  // overflow-x: auto;
+}
+.btnAr {
+  padding-left: 0;
+  padding-right: 0;
+  background-color: inherit;
+  border: none;
+}
+.iconAr {
+  width: 20px;
+  height: 20px;
+  stroke: var(--green);
+}
+.btnAdd {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  @include desktop {
+    flex-direction: row;
+    gap: 5px;
+  }
 }
