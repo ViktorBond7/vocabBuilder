@@ -89,6 +89,8 @@
 
 .link {
   font-weight: 500px;
+  display: grid;
+  grid-template-columns: 2;
 }
 .activeLink {
   display: flex;

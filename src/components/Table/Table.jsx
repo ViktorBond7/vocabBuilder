@@ -1,6 +1,6 @@
-import { width } from "@fortawesome/free-solid-svg-icons/fa1";
 import DataTable from "react-data-table-component";
 import { useLocation } from "react-router-dom";
+import css from "./Table.module.scss";
 // import ModalDeleteWord from "../ModalDeleteWord/ModalDeleteWord";
 // import { useState } from "react";
 // import ActionMenu from "../ActionMenu/ActionMenu";
@@ -14,29 +14,34 @@ const Table = ({ results, onActionClick }) => {
       name: "word",
       selector: (row) => row.ua,
       sortable: true,
+      minWidth: "90px",
+      // minWidth: "50px",
 
-      conditionalCellStyles: [
-        {
-          when: (row) => row.ua,
-          style: {
-            backgroundColor: "lightblue", // Задає колір фону для стовпця
-            color: "darkblue", // Задає колір тексту для стовпця
-            width: "20px",
-          },
-        },
-      ],
+      // conditionalCellStyles: [
+      //   {
+      //     when: (row) => row.ua,
+      //     style: {
+      //       // backgroundColor: "lightblue",
+      //       color: "darkblue", // Задає колір тексту для стовпця
+      //       width: "20px",
+      //     },
+      //   },
+      // ],
     },
     {
       name: "translation",
       selector: (row) => row.en,
       sortable: true,
+      minWidth: "90px",
     },
     {
       name: "category",
       selector: (row) => row.category,
+      minWidth: "98px",
     },
     {
       name: "",
+      minWidth: "38px",
       cell: (row) => {
         if (param.pathname === "/recommend") {
           return (
@@ -54,7 +59,7 @@ const Table = ({ results, onActionClick }) => {
   const customStyles = {
     header: {
       style: {
-        minHeight: "56px",
+        // minHeight: "56px",
         // backgroundColor: "red",
       },
     },
@@ -90,15 +95,15 @@ const Table = ({ results, onActionClick }) => {
   };
 
   return (
-    <>
+    <div className={css.container}>
       <DataTable
-        title="Word List"
+        // title="Word List"
         columns={collums}
         data={results} // data from redux
         customStyles={customStyles}
         responsive
       />
-    </>
+    </div>
   );
 };
 export default Table;
