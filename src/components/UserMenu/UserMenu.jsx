@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
-import spriteHref from "../../img/symbol-defs.svg";
+
 import css from "./UserMenu.module.scss";
 import { selectUser } from "../../redax/auth/selectors";
 import { logOut } from "../../redax/auth/operations";
 import { NavLink } from "react-router-dom";
 import { useCallback, useState } from "react";
 import MobileMenu from "../MobileMenu/MobileMenu";
+import IconSvg from "../IconSvg/IconSvg";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const UserMenu = () => {
 
   const buildClassName = ({ isActive }) =>
     clsx(css.link, isActive && css.activeLink);
+
   const openMenu = useCallback(() => {
     setIsMenuOpen(true);
   }, []); // Залежності порожні, бо функція не залежить від поточного стану
@@ -52,10 +54,9 @@ const UserMenu = () => {
       </button>
 
       <button className={css.burgerBtn} onClick={() => setIsMenuOpen(true)}>
-        <svg className={css.icon}>
-          <use href={`${spriteHref}#icon-Nav`}></use>
-        </svg>
+        <IconSvg name="icon-Nav" className={css.icon} />
       </button>
+
       {isMenuOpen && <MobileMenu onClose={closeMenu} user={user.name} />}
     </div>
   );

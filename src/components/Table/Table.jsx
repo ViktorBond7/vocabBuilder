@@ -1,3 +1,4 @@
+import { width } from "@fortawesome/free-solid-svg-icons/fa1";
 import DataTable from "react-data-table-component";
 import { useLocation } from "react-router-dom";
 // import ModalDeleteWord from "../ModalDeleteWord/ModalDeleteWord";
@@ -20,6 +21,7 @@ const Table = ({ results, onActionClick }) => {
           style: {
             backgroundColor: "lightblue", // Задає колір фону для стовпця
             color: "darkblue", // Задає колір тексту для стовпця
+            width: "20px",
           },
         },
       ],
@@ -53,6 +55,7 @@ const Table = ({ results, onActionClick }) => {
     header: {
       style: {
         minHeight: "56px",
+        // backgroundColor: "red",
       },
     },
     headRow: {
@@ -93,6 +96,7 @@ const Table = ({ results, onActionClick }) => {
         columns={collums}
         data={results} // data from redux
         customStyles={customStyles}
+        responsive
       />
     </>
   );
