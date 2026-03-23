@@ -19,6 +19,7 @@
 
 .pagination button.active {
   font-weight: bold;
-  background-color: #007bff;
+  background-color: var(--green);
   color: white;
+  border-radius: 4px;
 }

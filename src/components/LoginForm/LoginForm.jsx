@@ -74,7 +74,6 @@ const LoginForm = () => {
           </button>
         </Form>
       </Formik>
-      <NavLink to="/register">Register</NavLink>
       <Toaster />
     </>
   );

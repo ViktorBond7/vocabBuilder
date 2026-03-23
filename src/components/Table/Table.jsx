@@ -89,6 +89,7 @@ const Table = ({ results, onActionClick }) => {
         borderTopStyle: "solid",
         borderTopWidth: "1px",
         borderTopColor: "#dbdbdb",
+        backgroundColor: "rgba(133, 170, 159, 0.1)",
       },
     },
     headCells: {

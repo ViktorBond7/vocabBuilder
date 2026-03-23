@@ -8,7 +8,9 @@ const RegistratioPage = () => {
     <div className={css.container}>
       {/* <DocumentTitle>Registration</DocumentTitle> */}
       <RegistrationForm />
-      <NavLink to="/login">Login</NavLink>
+      <NavLink className={css.link} to="/login">
+        Login
+      </NavLink>
     </div>
   );
 };

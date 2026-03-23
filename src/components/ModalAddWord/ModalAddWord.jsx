@@ -20,16 +20,18 @@ const ModalAddWord = ({ openModal, closeModal }) => {
         ariaHideApp={false}
         style={{
           content: {
-            top: "50%",
+            top: "40%",
             left: "50%",
             right: "auto",
             bottom: "auto",
             marginRight: "-50%",
             transform: "translate(-50%, -50%)",
+            backgroundColor: "#85aa9f",
+            color: "#f8f8f8",
           },
         }}
       >
-        <div>ModalAddWord</div>
+        <h2 className={css.title}>Add word</h2>
 
         <Formik
           initialValues={{ ua: "", en: "", isIrregular: null, category: "" }}
@@ -65,9 +67,11 @@ const ModalAddWord = ({ openModal, closeModal }) => {
           }}
         >
           {({ isSubmitting, values }) => (
-            <Form>
+            <Form className={css.form}>
+              <label>Ukrainian</label>
               <Field name="ua" type="text" />
               <ErrorMessage name="ua" component="div" />
+              <label>English</label>
               <Field name="en" type="text" />
               <ErrorMessage name="en" component="div" />
 
@@ -85,7 +89,7 @@ const ModalAddWord = ({ openModal, closeModal }) => {
                 </div>
               )}
 
-              <button type="submit" disabled={isSubmitting}>
+              <button className={css.btn} type="submit" disabled={isSubmitting}>
                 Submit
               </button>
             </Form>

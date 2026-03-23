@@ -6,6 +6,8 @@ import { setCategory, setIsIrregular } from "../../redax/words/slice";
 import CategorySelect from "../Categories/CategorySelect";
 import { selectCategories, selectFilters } from "../../redax/words/selectors";
 import RadioButtonGroup from "../RadioButtonGroup/RadioButtonGroup";
+import css from "./Dashboard.module.scss";
+import IconSvg from "../IconSvg/IconSvg";
 
 const Dashboard = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -25,8 +27,7 @@ const Dashboard = () => {
   };
 
   return (
-    <>
-      <button onClick={handleModal}>add word</button>
+    <div className={css.container}>
       {isOpenModal && (
         <ModalAddWord
           openModal={isOpenModal}
@@ -47,7 +48,10 @@ const Dashboard = () => {
           value={currentIsIrregular}
         />
       )}
-    </>
+      <button className={css.btnAdd} onClick={handleModal}>
+        Add word <IconSvg name="icon-plus" className={css.icon} />
+      </button>
+    </div>
   );
 };
 

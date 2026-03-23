@@ -25,8 +25,6 @@ const UserMenu = () => {
 
   // Функція для ЗАКРИТТЯ (виправляємо true на false)
   const closeMenu = useCallback(() => {
-    console.log("888jhjhhjjh");
-
     setIsMenuOpen(false);
   }, []); // Теж порожні залежності
 

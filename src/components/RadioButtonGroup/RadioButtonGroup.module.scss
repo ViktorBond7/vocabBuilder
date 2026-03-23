@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  gap: 20px;
+}
+.label {
+  display: flex;
+  gap: 6px;
+  justify-items: center;
+  accent-color: var(--green);
+}

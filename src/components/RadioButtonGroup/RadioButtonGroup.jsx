@@ -1,7 +1,13 @@
+import css from "./RadioButtonGroup.module.scss";
+
 const RadioButtonGroup = ({ name, value, onChange }) => {
   return (
-    <div role="group" aria-labelledby="is-irregular-group">
-      <label>
+    <div
+      className={css.container}
+      role="group"
+      aria-labelledby="is-irregular-group"
+    >
+      <label className={css.label}>
         <input
           type="radio"
           name={name}
@@ -14,7 +20,7 @@ const RadioButtonGroup = ({ name, value, onChange }) => {
         />
         Regular
       </label>
-      <label>
+      <label className={css.label}>
         <input
           type="radio"
           name={name}

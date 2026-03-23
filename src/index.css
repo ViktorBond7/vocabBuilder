@@ -109,3 +109,10 @@ img {
   /* outline: 1px solid red; */
   box-sizing: border-box;
 }
+input {
+  outline: none;
+}
+button {
+  border: none;
+  background-color: inherit;
+}

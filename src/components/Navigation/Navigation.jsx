@@ -11,11 +11,6 @@ const Navigation = () => {
       <NavLink className={css.link} to="/">
         VocabBuilder
       </NavLink>
-      {/* {isLoggedIn && (
-        <NavLink className={css.link} to="/">
-          Contacts
-        </NavLink>
-      )} */}
     </nav>
   );
 };
