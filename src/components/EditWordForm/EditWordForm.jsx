@@ -23,12 +23,11 @@ const EditWordForm = ({ isOpen, onClose, row }) => {
     category: row?.category || "",
     isIrregular: row?.isIrregular || false,
   });
-  console.log("Редагування слова:", row); // Виводимо поточні дані для перевірки
+
   const dispatch = useDispatch();
   // Універсальний обробник для всіх інпутів
 
   const handleChange = (e) => {
-    console.log("Зміна в полі:", e.target.name, "Новий текст:", e.target.value);
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,

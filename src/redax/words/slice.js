@@ -7,6 +7,7 @@ import {
   fetchWords,
   fetchWordsOwn,
 } from "./operations";
+import { actions } from "react-table";
 
 const wordSlice = createSlice({
   name: "words",
@@ -53,11 +54,17 @@ const wordSlice = createSlice({
         state.items = action.payload.results;
         state.totalPages = action.payload.totalPages;
       })
+      .addCase(fetchWords.rejected, (state, action) => {
+        if (action.error.name === "AbortError") return;
+      })
 
       .addCase(fetchWordsOwn.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload.results;
         state.totalPages = action.payload.totalPages;
+      })
+      .addCase(fetchWordsOwn.rejected, (state, action) => {
+        if (action.error.name === "AbortError") return;
       })
 
       .addCase(deleteWord.fulfilled, (state, action) => {

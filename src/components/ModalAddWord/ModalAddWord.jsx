@@ -54,7 +54,7 @@ const ModalAddWord = ({ openModal, closeModal }) => {
             }
             try {
               await dispatch(addWord(wordData)).unwrap();
-              alert("Word added successfully!");
+              toast.success("Word added successfully!");
 
               closeModal();
             } catch (error) {

@@ -33,7 +33,7 @@ const LoginForm = () => {
           dispatch(logIn(values))
             .unwrap()
             .then(() => {
-              toast.success("Successfully!");
+              // toast.success("Successfully!");
             })
             .catch(() => {
               toast.error("This didn't work.");

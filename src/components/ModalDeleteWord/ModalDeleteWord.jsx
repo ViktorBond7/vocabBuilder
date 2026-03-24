@@ -8,7 +8,6 @@ const ModalDeleteWord = ({ openModal, onClose, row }) => {
 
   const handleDeleteWord = async () => {
     try {
-      console.log("delete word", row._id);
       await dispatch(deleteWord(row._id)).unwrap();
 
       onClose();

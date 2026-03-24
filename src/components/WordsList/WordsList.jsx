@@ -15,41 +15,38 @@ import Table from "../../components/Table/Table";
 import { resetPageState, setPage } from "../../redax/words/slice";
 import usePageSync from "../../hooks/usePageSync";
 
-const WordList = ({ fetchAction, onActionClick }) => {
+const WordList = ({ onActionClick }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
-      dispatch(resetPageState());
-    };
-  }, [dispatch]);
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(resetPageState());
+  //   };
+  // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchCategories());
+  // }, [dispatch]);
 
   const results = useSelector(selectWords);
   const page = useSelector(selectPage);
-
-  console.log("results", results.length);
-  console.log("page", page);
 
   // const loading = useSelector(selectLoading);
 
   const totalPages = useSelector(selectTotalPages);
 
-  const { keyword, category, isIrregular } = useSelector(selectFilters);
+  // const { keyword, category, isIrregular } = useSelector(selectFilters);
 
-  useEffect(() => {
-    dispatch(
-      fetchAction({
-        page,
-        keyword,
-        category,
-        isIrregular,
-      }),
-    );
-  }, [dispatch, keyword, category, isIrregular, page]);
+  // useEffect(() => {
+  //   dispatch(
+  //     fetchAction({
+  //       page,
+  //       keyword,
+  //       category,
+  //       isIrregular,
+  //     }),
+  //   );
+  // }, [dispatch, keyword, category, isIrregular, page]);
 
   const handlePageChange = (newPage) => {
     dispatch(setPage(newPage));

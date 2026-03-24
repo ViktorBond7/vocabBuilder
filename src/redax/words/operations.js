@@ -7,8 +7,9 @@ export const fetchWords = createAsyncThunk(
   "words/fetchAll",
   async (
     { page, keyword = "", category = "", isIrregular = null },
-    thunkAPI,
+    { rejectWithValue, signal },
   ) => {
+    // const { signal } = thunkAPI;
     try {
       const response = await axios.get("words/all", {
         params: {
@@ -18,11 +19,12 @@ export const fetchWords = createAsyncThunk(
           category,
           isIrregular,
         },
+        signal,
       });
 
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   },
 );
@@ -89,7 +91,7 @@ export const fetchWordsOwn = createAsyncThunk(
   "words/fetchWordsOwn",
   async (
     { page, keyword = "", category = "", isIrregular = null },
-    thunkAPI,
+    { rejectWithValue, signal },
   ) => {
     try {
       const response = await axios.get("words/own", {
@@ -100,11 +102,12 @@ export const fetchWordsOwn = createAsyncThunk(
           category,
           isIrregular,
         },
+        signal,
       });
 
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   },
 );

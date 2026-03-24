@@ -2,19 +2,14 @@ import WordList from "../../components/WordsList/WordsList";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Container from "../../components/Container/Container";
 import { addWordWithRecommend, fetchWords } from "../../redax/words/operations";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { resetPageState } from "../../redax/words/slice";
 import toast, { Toaster } from "react-hot-toast";
+import useWords from "../../hooks/useWords";
 
 const RecommendPage = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
-      dispatch(resetPageState());
-    };
-  }, [dispatch]);
+  useWords(fetchWords);
 
   const handleAddWord = async (row) => {
     try {
@@ -32,7 +27,7 @@ const RecommendPage = () => {
       {/* <DocumentTitle>Login</DocumentTitle> */}
       <WordList
         key="recommend"
-        fetchAction={fetchWords}
+        // fetchAction={fetchWords}
         onActionClick={(_, row) => handleAddWord(row)}
       />
       <Toaster />
