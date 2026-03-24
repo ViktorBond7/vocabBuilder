@@ -30,7 +30,7 @@ const useWords = (fetchAction) => {
     );
 
     return () => {
-      promise.abort(); // 💥 скасовує старий запит
+      promise.abort();
     };
   }, [dispatch, keyword, category, isIrregular, page, fetchAction]);
 };

@@ -1,32 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./WordsList.module.scss";
 import {
-  selectFilters,
   // selectLoading,
   selectPage,
   selectTotalPages,
   selectWords,
 } from "../../redax/words/selectors";
-import { useEffect } from "react";
-import { fetchCategories } from "../../redax/words/operations";
 import CustomPagination from "../../components/CustomPagination/CustomPagination";
 import Table from "../../components/Table/Table";
 
-import { resetPageState, setPage } from "../../redax/words/slice";
-import usePageSync from "../../hooks/usePageSync";
+import { setPage } from "../../redax/words/slice";
 
 const WordList = ({ onActionClick }) => {
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(resetPageState());
-  //   };
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(fetchCategories());
-  // }, [dispatch]);
 
   const results = useSelector(selectWords);
   const page = useSelector(selectPage);
@@ -34,19 +20,6 @@ const WordList = ({ onActionClick }) => {
   // const loading = useSelector(selectLoading);
 
   const totalPages = useSelector(selectTotalPages);
-
-  // const { keyword, category, isIrregular } = useSelector(selectFilters);
-
-  // useEffect(() => {
-  //   dispatch(
-  //     fetchAction({
-  //       page,
-  //       keyword,
-  //       category,
-  //       isIrregular,
-  //     }),
-  //   );
-  // }, [dispatch, keyword, category, isIrregular, page]);
 
   const handlePageChange = (newPage) => {
     dispatch(setPage(newPage));

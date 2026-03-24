@@ -27,7 +27,6 @@ const RecommendPage = () => {
       {/* <DocumentTitle>Login</DocumentTitle> */}
       <WordList
         key="recommend"
-        // fetchAction={fetchWords}
         onActionClick={(_, row) => handleAddWord(row)}
       />
       <Toaster />
