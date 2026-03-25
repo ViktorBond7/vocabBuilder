@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import wordSlice from "./words/slice";
+import wordReducer from "./words/slice";
+import tasksReducer from "./tasks/slice";
 import {
   persistStore,
   persistReducer,
@@ -24,7 +25,8 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    words: wordSlice,
+    words: wordReducer,
+    tasks: tasksReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

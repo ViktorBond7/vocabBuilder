@@ -7,7 +7,6 @@ import {
   fetchWords,
   fetchWordsOwn,
 } from "./operations";
-import { actions } from "react-table";
 
 const wordSlice = createSlice({
   name: "words",

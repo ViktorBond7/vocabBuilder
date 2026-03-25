@@ -1,7 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { selectUserToken } from "../auth/selectors";
 
 export const fetchWords = createAsyncThunk(
   "words/fetchAll",
@@ -9,7 +7,6 @@ export const fetchWords = createAsyncThunk(
     { page, keyword = "", category = "", isIrregular = null },
     { rejectWithValue, signal },
   ) => {
-    // const { signal } = thunkAPI;
     try {
       const response = await axios.get("words/all", {
         params: {
