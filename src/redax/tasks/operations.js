@@ -7,6 +7,7 @@ export const fetchTasks = createAsyncThunk(
     try {
       console.log("Fetching tasks...");
       const response = await axios.get("words/tasks");
+      // console.log("Fetched tasks:", response.data);
 
       return response.data;
     } catch (error) {
@@ -15,13 +16,13 @@ export const fetchTasks = createAsyncThunk(
   },
 );
 
-export const fetchAnswers = createAsyncThunk(
-  "words/fetchAnswers",
+export const sendAnswers = createAsyncThunk(
+  "words/sendAnswers",
   async (data, thunkAPI) => {
     try {
-      console.log("Fetching answers...");
+      console.log("Sending answers...");
       const response = await axios.post("words/answers", data);
-      // console.log("Fetched answers:", response.data);
+      console.log("Sent answers:", response.data);
 
       return response.data;
     } catch (error) {

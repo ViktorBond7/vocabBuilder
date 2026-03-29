@@ -1,0 +1,49 @@
+.title {
+  margin-bottom: 30px;
+}
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+
+  /* Оця рамка і створює ілюзію, що все це — одне поле */
+  border: 1px solid #000; /* Тут постав колір зі своєї теми */
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 180px; /* Задаємо висоту віконця */
+  background-color: #f9f9f9; /* Якщо є якийсь фон */
+}
+
+.textArea {
+  flex-grow: 1; /* Змушує textarea зайняти весь вільний простір зверху */
+  width: 100%;
+  border: none; /* Прибираємо стандартну рамку */
+  outline: none; /* Прибираємо синє світіння при кліку */
+  resize: none; /* Забороняємо користувачу розтягувати поле за куточок */
+  background: transparent;
+  font-size: 16px;
+}
+
+.inputFooter {
+  display: flex;
+  justify-content: space-between; /* Розсуває кнопку і прапорець по краях */
+  align-items: flex-end; /* Притискає до низу */
+  margin-top: 12px; /* Відступ від тексту */
+}
+
+/* Додатково: стилі для кнопки і мови... */
+.langIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Відстань між блоками */
+}
+.buttonsWrapper {
+  display: flex;
+  justify-content: center; /* Вирівнюємо кнопку по центру */
+  gap: 40px; /* Відстань між кнопками */
+}
