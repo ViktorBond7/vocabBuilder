@@ -67,6 +67,34 @@ button:focus-visible {
   }
 } */
 
+:root {
+  --bg-color: #fcfcfc;
+  --surface-color: #ffffff;
+  --surface-color-hover: #f2f4f7;
+  --text-color: #121417;
+  --border-color: #d7d9dd;
+  --accent-color: #e84a5f;
+  --header-shadow: rgba(5, 5, 5, 0.1);
+
+  --black: #121417;
+  --white: #fcfcfc;
+  --green: #85aa9f;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121417;
+  --surface-color: #1d2125;
+  --surface-color-hover: #2a3137;
+  --text-color: #f8f8f8;
+  --border-color: #3a434b;
+  --accent-color: #fc832c;
+  --header-shadow: rgba(0, 0, 0, 0.35);
+
+  --black: #f8f8f8;
+  --white: #121417;
+  --green: #a6c0b7;
+}
+
 h1,
 h2,
 h3,
@@ -93,6 +121,23 @@ ul {
 a {
   color: currentColor;
   text-decoration: none;
+}
+
+html,
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition:
+    background-color 250ms ease,
+    color 250ms ease;
+}
+
+input,
+textarea,
+select {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
 }
 
 button {

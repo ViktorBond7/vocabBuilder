@@ -16,7 +16,7 @@ const TrainingPage = () => {
   const answers = useSelector(selectAnswers);
 
   const tasks1 = useSelector(selectTasks);
-  console.log("userAnswers", userAnswers);
+
   const tasks2 = tasks1.slice(0, 3); // Limit to 5 tasks for training
   const tasks3 = tasks1.slice(20, 23);
   const tasks = [...tasks2, ...tasks3];
@@ -35,8 +35,8 @@ const TrainingPage = () => {
 
     const currentTask = tasks[currentTaskIndex];
     const fullAnswer = {
-      ua: values.ua?.trim() || "",
-      en: values.en?.trim() || "",
+      ua: values.ua?.trim().toLowerCase() || "",
+      en: values.en?.trim().toLowerCase() || "",
       _id: currentTask._id,
       task: currentTask.task,
     };
@@ -59,8 +59,12 @@ const TrainingPage = () => {
           en: `${tasks[currentTaskIndex]?.en || ""}`,
         }}
         onSubmit={(values, { resetForm }) => {
+          const oldValues = {
+            ua: values.ua?.trim().toLowerCase() || "",
+            en: values.en?.trim().toLowerCase() || "",
+          };
           const finalAnswer = {
-            ...values,
+            ...oldValues,
             _id: tasks[currentTaskIndex]._id,
             task: tasks[currentTaskIndex].task,
           };
@@ -72,6 +76,7 @@ const TrainingPage = () => {
           dispatch(sendAnswers(allAnswers));
           resetForm();
           setOpenModal(true);
+          setUserAnswers([]);
         }}
       >
         {({ isSubmitting, values }) => (
